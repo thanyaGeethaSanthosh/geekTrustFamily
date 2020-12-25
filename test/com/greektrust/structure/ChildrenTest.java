@@ -3,8 +3,7 @@ package com.greektrust.structure;
 import com.greektrust.exceptions.PersonNotFountException;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 public class ChildrenTest {
 
@@ -33,6 +32,22 @@ public class ChildrenTest {
     }
 
     @Test
+    public void isChildPresentShouldSayTrueWhenChildIsPResent() {
+        Children children = new Children();
+        children.add(new Node("Vich"));
+        children.add(new Node("Ish"));
+        assertTrue(children.isChildPresent("Ish"));
+    }
+
+    @Test
+    public void isChildPresentShouldSayFalseWhenChildIsNotPResent() {
+        Children children = new Children();
+        children.add(new Node("Vich"));
+        children.add(new Node("Ish"));
+        assertFalse(children.isChildPresent("Anga"));
+    }
+
+    @Test
     public void findChildShouldFindTheChildWhenPresentInChildren() {
         Children children = new Children();
         children.add(new Node("Ish"));
@@ -54,7 +69,7 @@ public class ChildrenTest {
         try {
             children.findChild("Ish");
         } catch (PersonNotFountException e) {
-            assertEquals(e.getMessage(),"PERSON_NOT_FOUND");
+            assertEquals(e.getMessage(), "PERSON_NOT_FOUND");
         }
     }
 }
