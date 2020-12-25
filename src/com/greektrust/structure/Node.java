@@ -1,6 +1,7 @@
 package com.greektrust.structure;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Node {
     private final String name;
@@ -11,6 +12,14 @@ public class Node {
         this.name = name;
         this.leftNext = null;
         this.rightNext = new ArrayList<>();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Node node = (Node) o;
+        return Objects.equals(name, node.name) && Objects.equals(rightNext, node.rightNext) && Objects.equals(leftNext, node.leftNext);
     }
 
     public void addLeftNext(String name) {
@@ -38,4 +47,5 @@ public class Node {
         }
         return false;
     }
+
 }
