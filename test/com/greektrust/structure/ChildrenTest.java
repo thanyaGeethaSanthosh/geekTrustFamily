@@ -12,18 +12,18 @@ public class ChildrenTest {
         Children list = new Children();
 
         Children list1 = new Children();
-        list1.add(new Node("Ish"));
-        list1.add(new Node("Vich"));
+        list1.add(new Person("Ish"));
+        list1.add(new Person("Vich"));
 
         Children list2 = new Children();
-        list2.add(new Node("Aras"));
-        list2.add(new Node("Satya"));
+        list2.add(new Person("Aras"));
+        list2.add(new Person("Satya"));
 
         Children children = new Children();
-        children.add(new Node("Ish"));
-        children.add(new Node("Vich"));
-        children.add(new Node("Aras"));
-        children.add(new Node("Satya"));
+        children.add(new Person("Ish"));
+        children.add(new Person("Vich"));
+        children.add(new Person("Aras"));
+        children.add(new Person("Satya"));
 
         list.addAll(list1);
         list.addAll(list2);
@@ -34,27 +34,27 @@ public class ChildrenTest {
     @Test
     public void isChildPresentShouldSayTrueWhenChildIsPResent() {
         Children children = new Children();
-        children.add(new Node("Vich"));
-        children.add(new Node("Ish"));
+        children.add(new Person("Vich"));
+        children.add(new Person("Ish"));
         assertTrue(children.isChildPresent("Ish"));
     }
 
     @Test
     public void isChildPresentShouldSayFalseWhenChildIsNotPResent() {
         Children children = new Children();
-        children.add(new Node("Vich"));
-        children.add(new Node("Ish"));
+        children.add(new Person("Vich"));
+        children.add(new Person("Ish"));
         assertFalse(children.isChildPresent("Anga"));
     }
 
     @Test
     public void findChildShouldFindTheChildWhenPresentInChildren() {
         Children children = new Children();
-        children.add(new Node("Ish"));
-        children.add(new Node("Vich"));
-        children.add(new Node("Satya"));
+        children.add(new Person("Ish"));
+        children.add(new Person("Vich"));
+        children.add(new Person("Satya"));
         try {
-            assertEquals(new Node("Ish"), children.findChild("Ish"));
+            assertEquals(new Person("Ish"), children.findChild("Ish"));
         } catch (PersonNotFountException e) {
             e.printStackTrace();
         }
@@ -63,9 +63,9 @@ public class ChildrenTest {
     @Test
     public void findChildShouldThrowPersonNotFoundExceptionWhenChildNotPresentInChildren() {
         Children children = new Children();
-        children.add(new Node("Ish"));
-        children.add(new Node("Vich"));
-        children.add(new Node("Satya"));
+        children.add(new Person("Ish"));
+        children.add(new Person("Vich"));
+        children.add(new Person("Satya"));
         try {
             children.findChild("Ish");
         } catch (PersonNotFountException e) {

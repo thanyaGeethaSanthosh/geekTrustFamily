@@ -5,10 +5,10 @@ import com.greektrust.exceptions.PersonNotFountException;
 import java.util.ArrayList;
 
 public class Children {
-    private final ArrayList<Node> nodes;
+    private final ArrayList<Person> people;
 
     public Children() {
-        this.nodes = new ArrayList<>();
+        this.people = new ArrayList<>();
     }
 
     @Override
@@ -16,30 +16,30 @@ public class Children {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Children children = (Children) o;
-        return nodes.equals(children.nodes);
+        return people.equals(children.people);
     }
 
     public void addAll(Children list) {
-        this.nodes.addAll(list.nodes);
+        this.people.addAll(list.people);
     }
 
-    public void add(Node child) {
-        this.nodes.add(child);
+    public void add(Person child) {
+        this.people.add(child);
     }
 
     public boolean isChildPresent(String childName) {
-        for (Node node : this.nodes) {
-            if (node.isNameMatch(childName)) {
+        for (Person person : this.people) {
+            if (person.isNameMatch(childName)) {
                 return true;
             }
         }
         return false;
     }
 
-    public Node findChild(String childName) throws PersonNotFountException {
-        for (Node node : this.nodes) {
-            if (node.isNameMatch(childName)) {
-                return node;
+    public Person findChild(String childName) throws PersonNotFountException {
+        for (Person person : this.people) {
+            if (person.isNameMatch(childName)) {
+                return person;
             }
         }
         throw new PersonNotFountException();
