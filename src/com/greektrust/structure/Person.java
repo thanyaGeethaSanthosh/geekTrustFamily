@@ -26,7 +26,7 @@ public class Person {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Person person = (Person) o;
-        return Objects.equals(name, person.name) && Objects.equals(partner, person.partner);
+        return Objects.equals(name, person.name) && Objects.equals(mother, person.mother) && Objects.equals(partner, person.partner);
     }
 
     public void addPartner(String  partnerName) {
@@ -39,5 +39,12 @@ public class Person {
 
     public boolean isPartnerNameMatch(String name) {
         return this.partner.isNameMatch(name);
+    }
+
+    public Person findPerson(String name) {
+        if (this.isNameMatch(name)){
+            return this;
+        }
+       return this.partner==null?null:this.partner.findPerson(name);
     }
 }
