@@ -1,5 +1,9 @@
+import com.greektrust.structure.Family;
+
 public class Geektrust {
     public static void main(String[] args) {
-        System.out.println("hello world");
+        Family family = new Family("Shan");
+        family.addPartner("Shan","Anga");
+        family.addChild("Anga","Ish","Male");
     }
 }
