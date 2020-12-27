@@ -7,12 +7,12 @@ public class Person {
     private Women mother = null;
     private Women partner = null;
 
-    public Person(String name,Women mother) {
+    public Person(String name, Women mother) {
         this.name = name;
         this.mother = mother;
     }
 
-    public Person(Women partner,String name) {
+    public Person(Women partner, String name) {
         this.partner = partner;
         this.name = name;
     }
@@ -29,8 +29,8 @@ public class Person {
         return Objects.equals(name, person.name) && Objects.equals(mother, person.mother) && Objects.equals(partner, person.partner);
     }
 
-    public void addPartner(String  partnerName) {
-       this.partner=new Women(this,partnerName);
+    public void addPartner(String partnerName) {
+        this.partner = new Women(this, partnerName);
     }
 
     public boolean isNameMatch(String name) {
@@ -42,9 +42,9 @@ public class Person {
     }
 
     public Person findPerson(String name) {
-        if (this.isNameMatch(name)){
+        if (this.isNameMatch(name)) {
             return this;
         }
-       return this.partner==null?null:this.partner.findPerson(name);
+        return this.partner == null ? null : this.partner.findPerson(name);
     }
 }

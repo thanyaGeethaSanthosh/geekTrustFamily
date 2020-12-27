@@ -24,7 +24,8 @@ public class Family {
         Women mother = (Women) this.parent.findPerson(motherName);
         mother.addChild(childName, genderOfKid);
     }
-    public void addPartner(String oldMemberName, String partnerName){
+
+    public void addPartner(String oldMemberName, String partnerName) {
         Person member = this.parent.findPerson(oldMemberName);
         member.addPartner(partnerName);
     }
