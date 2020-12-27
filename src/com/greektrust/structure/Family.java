@@ -19,10 +19,9 @@ public class Family {
         return Objects.equals(parent, family.parent);
     }
 
-    public void addChild(String motherName, String childName, String gender) {
-        Gender genderOfKid = Gender.valueOf(gender.toUpperCase());
+    public void addChild(String motherName, String childName,Gender gender) {
         Women mother = (Women) this.parent.findPerson(motherName);
-        mother.addChild(childName, genderOfKid);
+        mother.addChild(childName, gender);
     }
 
     public void addPartner(String oldMemberName, String partnerName) {
