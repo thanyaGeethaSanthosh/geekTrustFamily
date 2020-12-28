@@ -44,11 +44,10 @@ public class Person {
         return false;
     }
 
-    public Person findChild(String name) {
+    public Person findInChild(String name) {
         for (Person person : this.children) {
-            Person person1 = person.findPerson(name);
-            if (person1 != null) {
-                return person1;
+            if (person.name.equals(name)) {
+                return person;
             }
         }
         return null;
@@ -61,6 +60,6 @@ public class Person {
         if (this.partner.isNameMatch(name)) {
             return this.partner;
         }
-        return this;
+        return this.findInChild(name);
     }
 }
