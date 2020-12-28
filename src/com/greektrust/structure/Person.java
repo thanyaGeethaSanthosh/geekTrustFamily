@@ -1,6 +1,7 @@
 package com.greektrust.structure;
 
 import com.greektrust.constants.Gender;
+import com.greektrust.constants.Status;
 
 import java.util.ArrayList;
 
@@ -26,9 +27,13 @@ public class Person {
         partner.partner = this;
     }
 
-    public void addChild(Person child) {
+    public Status addChild(Person child) {
+        if(this.gender!=Gender.FEMALE) {
+            return Status.CHILD_ADDITION_FAILED;
+        }
         this.children.add(child);
         child.mother = this;
+        return Status.CHILD_ADDITION_SUCCEEDED;
     }
 
     public boolean isPartnerNameMatch(String name) {
