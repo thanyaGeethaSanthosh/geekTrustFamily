@@ -2,13 +2,11 @@ package com.greektrust.structure;
 
 import com.greektrust.constants.Gender;
 
-import java.util.Objects;
-
 public class Family {
     private final Person parent;
 
-    public Family(String parentName) {
-        this.parent = new Person(parentName);
+    public Family(String parentName, Gender parentGender) {
+        this.parent = new Person(parentName, parentGender);
     }
 
     @Override
@@ -16,16 +14,16 @@ public class Family {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Family family = (Family) o;
-        return Objects.equals(parent, family.parent);
+        return parent.equals(family.parent);
     }
 
-    public void addChild(String motherName, String childName,Gender gender) {
-        Women mother = (Women) this.parent.findPerson(motherName);
-        mother.addChild(childName, gender);
+    public void addChild(String motherName, String childName, Gender gender) {
+        Person mother = this.parent.findPerson(motherName);
+        mother.addChild(new Person(childName, gender));
     }
 
-    public void addPartner(String oldMemberName, String partnerName) {
+    public void addPartner(String oldMemberName, String partnerName, Gender partnerGender) {
         Person member = this.parent.findPerson(oldMemberName);
-        member.addPartner(partnerName);
+        member.addPartner(new Person(partnerName, partnerGender));
     }
 }
