@@ -4,6 +4,8 @@ import com.greektrust.constants.Gender;
 import com.greektrust.constants.Status;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class Person {
     private final String name;
@@ -73,7 +75,24 @@ public class Person {
         return this.partner.children;
     }
 
-    public boolean isFemale(){
+    public boolean isFemale() {
         return this.gender.isFemale();
+    }
+
+    public List<Person> findSiblings() {
+        ArrayList<Person> children = this.mother.getChildren();
+        return children.stream().filter(child -> !child.isNameMatch(this.name)).collect(Collectors.toList());
+    }
+
+    public List<Person> findSons() {
+        ArrayList<Person> children = this.getChildren();
+        return children.stream().filter(person -> !person.isFemale()).collect(Collectors.toList());
+
+    }
+
+    public List<Person> findDaughters() {
+        ArrayList<Person> children = this.getChildren();
+        return children.stream().filter(Person::isFemale).collect(Collectors.toList());
+
     }
 }

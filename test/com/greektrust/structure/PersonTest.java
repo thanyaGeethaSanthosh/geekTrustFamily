@@ -5,6 +5,7 @@ import com.greektrust.constants.Status;
 import org.junit.Test;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -182,7 +183,7 @@ public class PersonTest {
         Person person = new Person("Anga", Gender.FEMALE);
         Person child1 = new Person("Ish", Gender.MALE);
         Person child2 = new Person("Vich", Gender.MALE);
-        Person child3= new Person("Satya", Gender.FEMALE);
+        Person child3 = new Person("Satya", Gender.FEMALE);
         person.addChild(child1);
         person.addChild(child2);
         person.addChild(child3);
@@ -191,7 +192,7 @@ public class PersonTest {
         children.add(child2);
         children.add(child3);
 
-        assertEquals(children,person.getChildren());
+        assertEquals(children, person.getChildren());
     }
 
     @Test
@@ -225,5 +226,76 @@ public class PersonTest {
         Person person = new Person("Shan", Gender.MALE);
 
         assertFalse(person.isFemale());
+    }
+
+    @Test
+    public void findSonShouldFindTheSonFromFather() {
+        Person person = new Person("Shan", Gender.MALE);
+        Person partner = new Person("Anga", Gender.FEMALE);
+        person.addPartner(partner);
+        Person child1 = new Person("Ish", Gender.MALE);
+        Person child2 = new Person("Vich", Gender.MALE);
+        Person child3 = new Person("Satya", Gender.FEMALE);
+        partner.addChild(child1);
+        partner.addChild(child2);
+        partner.addChild(child3);
+        List<Person> son = new ArrayList<>();
+        son.add(child1);
+        son.add(child2);
+
+        assertEquals(son, person.findSons());
+    }
+
+    @Test
+    public void findSonShouldFindTheSonFromMother() {
+        Person person = new Person("Shan", Gender.MALE);
+        Person partner = new Person("Anga", Gender.FEMALE);
+        person.addPartner(partner);
+        Person child1 = new Person("Ish", Gender.MALE);
+        Person child2 = new Person("Vich", Gender.MALE);
+        Person child3 = new Person("Satya", Gender.FEMALE);
+        partner.addChild(child1);
+        partner.addChild(child2);
+        partner.addChild(child3);
+        List<Person> son = new ArrayList<>();
+        son.add(child1);
+        son.add(child2);
+
+        assertEquals(son, partner.findSons());
+    }
+
+    @Test
+    public void findDaughterShouldFindTheDaughtersForGivenFatherName() {
+        Person person = new Person("Shan", Gender.MALE);
+        Person partner = new Person("Anga", Gender.FEMALE);
+        person.addPartner(partner);
+        Person child1 = new Person("Ish", Gender.MALE);
+        Person child2 = new Person("Vich", Gender.MALE);
+        Person child3 = new Person("Satya", Gender.FEMALE);
+        partner.addChild(child1);
+        partner.addChild(child2);
+        partner.addChild(child3);
+        List<Person> daughter = new ArrayList<>();
+        daughter.add(child3);
+
+        assertEquals(daughter, person.findDaughters());
+    }
+
+    @Test
+    public void findSiblingsShouldFindTheSiblingsForGivenFatherName() {
+        Person person = new Person("Shan", Gender.MALE);
+        Person partner = new Person("Anga", Gender.FEMALE);
+        person.addPartner(partner);
+        Person child1 = new Person("Ish", Gender.MALE);
+        Person child2 = new Person("Vich", Gender.MALE);
+        Person child3 = new Person("Satya", Gender.FEMALE);
+        partner.addChild(child1);
+        partner.addChild(child2);
+        partner.addChild(child3);
+        List<Person> siblings = new ArrayList<>();
+        siblings.add(child1);
+        siblings.add(child2);
+
+        assertEquals(siblings, child3.findSiblings());
     }
 }

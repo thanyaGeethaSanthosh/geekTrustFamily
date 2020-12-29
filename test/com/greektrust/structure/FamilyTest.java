@@ -56,7 +56,7 @@ public class FamilyTest {
         son.add(child1);
         son.add(child2);
 
-        assertEquals(son, family.findSon("Anga"));
+        assertEquals(son, family.findSons("Anga"));
     }
 
     @Test
@@ -75,11 +75,11 @@ public class FamilyTest {
         son.add(child1);
         son.add(child2);
 
-        assertEquals(son, family.findSon("Shan"));
+        assertEquals(son, family.findSons("Shan"));
     }
 
     @Test
-    public void findDaughterShouldFindTheSonForGivenFatherName() {
+    public void findDaughterShouldFindTheDaughtersForGivenFatherName() {
         Person person = new Person("Shan", Gender.MALE);
         Family family = new Family(person);
         Person partner = new Person("Anga", Gender.FEMALE);
@@ -93,6 +93,25 @@ public class FamilyTest {
         List<Person> daughter = new ArrayList<>();
         daughter.add(child3);
 
-        assertEquals(daughter, family.findDaughter("Shan"));
+        assertEquals(daughter, family.findDaughters("Shan"));
+    }
+
+    @Test
+    public void findSiblingsShouldFindTheSiblingsForGivenFatherName() {
+        Person person = new Person("Shan", Gender.MALE);
+        Family family = new Family(person);
+        Person partner = new Person("Anga", Gender.FEMALE);
+        family.addPartner("Shan", partner);
+        Person child1 = new Person("Ish", Gender.MALE);
+        Person child2 = new Person("Vich", Gender.MALE);
+        Person child3 = new Person("Satya", Gender.FEMALE);
+        family.addChild("Anga", child1);
+        family.addChild("Anga", child2);
+        family.addChild("Anga", child3);
+        List<Person> siblings = new ArrayList<>();
+        siblings.add(child1);
+        siblings.add(child2);
+
+        assertEquals(siblings, family.findSiblings("Satya"));
     }
 }

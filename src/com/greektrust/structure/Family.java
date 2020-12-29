@@ -3,8 +3,6 @@ package com.greektrust.structure;
 import com.greektrust.constants.Status;
 
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class Family {
     private final Person familyHead;
@@ -26,15 +24,18 @@ public class Family {
         member.addPartner(partner);
     }
 
-    public List<Person> findSon(String name) {
+    public List<Person> findSons(String name) {
         Person person = this.familyHead.findPerson(name);
-        Stream<Person> personStream = person.getChildren().stream().filter(child -> !child.isFemale());
-        return personStream.collect(Collectors.toList());
+        return person.findSons();
     }
 
-    public List<Person> findDaughter(String name) {
+    public List<Person> findDaughters(String name) {
         Person person = this.familyHead.findPerson(name);
-        Stream<Person> personStream = person.getChildren().stream().filter(Person::isFemale);
-        return personStream.collect(Collectors.toList());
+        return person.findDaughters();
+    }
+
+    public List<Person> findSiblings(String name){
+        Person person = this.familyHead.findPerson(name);
+        return person.findSiblings();
     }
 }
