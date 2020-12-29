@@ -1,6 +1,7 @@
 package com.greektrust.structure;
 
 import com.greektrust.constants.Gender;
+import com.greektrust.constants.Relationship;
 import com.greektrust.constants.Status;
 import org.junit.Test;
 
@@ -41,7 +42,7 @@ public class FamilyTest {
     }
 
     @Test
-    public void findSonShouldFindTheSonForGivenMotherName() {
+    public void shouldFindListOfSonForGivenMotherName() {
         Person person = new Person("Shan", Gender.MALE);
         Family family = new Family(person);
         Person partner = new Person("Anga", Gender.FEMALE);
@@ -56,11 +57,11 @@ public class FamilyTest {
         son.add(child1);
         son.add(child2);
 
-        assertEquals(son, family.findSons("Anga"));
+        assertEquals(son, family.findRelatives("Anga", Relationship.SON));
     }
 
     @Test
-    public void findSonShouldFindTheSonForGivenFatherName() {
+    public void shouldFindListOfSonForGivenFatherName() {
         Person person = new Person("Shan", Gender.MALE);
         Family family = new Family(person);
         Person partner = new Person("Anga", Gender.FEMALE);
@@ -75,11 +76,11 @@ public class FamilyTest {
         son.add(child1);
         son.add(child2);
 
-        assertEquals(son, family.findSons("Shan"));
+        assertEquals(son, family.findRelatives("Shan", Relationship.SON));
     }
 
     @Test
-    public void findDaughterShouldFindTheDaughtersForGivenFatherName() {
+    public void shouldFindListOfDaughtersForGivenFatherName() {
         Person person = new Person("Shan", Gender.MALE);
         Family family = new Family(person);
         Person partner = new Person("Anga", Gender.FEMALE);
@@ -93,11 +94,11 @@ public class FamilyTest {
         List<Person> daughter = new ArrayList<>();
         daughter.add(child3);
 
-        assertEquals(daughter, family.findDaughters("Shan"));
+        assertEquals(daughter, family.findRelatives("Shan", Relationship.DAUGHTER));
     }
 
     @Test
-    public void findSiblingsShouldFindTheSiblingsForGivenFatherName() {
+    public void shouldFindSiblingsForGivenChildName() {
         Person person = new Person("Shan", Gender.MALE);
         Family family = new Family(person);
         Person partner = new Person("Anga", Gender.FEMALE);
@@ -112,6 +113,6 @@ public class FamilyTest {
         siblings.add(child1);
         siblings.add(child2);
 
-        assertEquals(siblings, family.findSiblings("Satya"));
+        assertEquals(siblings, family.findRelatives("Satya", Relationship.SIBLINGS));
     }
 }
