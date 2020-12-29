@@ -167,4 +167,31 @@ public class FamilyTest {
 
         assertEquals(paternalAunt, family.findRelatives("Vila", Relationship.PATERNAL_AUNT));
     }
+
+    @Test
+    public void shouldFindMaternalUncleForGivenPersonName() {
+        Person person = new Person("Shan", Gender.MALE);
+        Family family = new Family(person);
+        Person partner = new Person("Anga", Gender.FEMALE);
+        family.addPartner("Shan", partner);
+
+        Person child1 = new Person("Ish", Gender.MALE);
+        Person child2 = new Person("Vich", Gender.MALE);
+        Person child3 = new Person("Satya", Gender.FEMALE);
+        family.addChild("Anga", child1);
+        family.addChild("Anga", child2);
+        family.addChild("Anga", child3);
+
+        Person child3Partner = new Person("Vyan", Gender.MALE);
+        family.addPartner("Satya", child3Partner);
+
+        Person grandChild = new Person("Asva", Gender.MALE);
+        family.addChild("Satya", grandChild);
+
+        List<Person> paternalUncles = new ArrayList<>();
+        paternalUncles.add(child1);
+        paternalUncles.add(child2);
+
+        assertEquals(paternalUncles, family.findRelatives("Asva", Relationship.MATERNAL_UNCLE));
+    }
 }

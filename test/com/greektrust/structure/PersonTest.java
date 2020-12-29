@@ -304,16 +304,20 @@ public class PersonTest {
         Person person = new Person("Shan", Gender.MALE);
         Person partner = new Person("Anga", Gender.FEMALE);
         person.addPartner(partner);
+
         Person child1 = new Person("Ish", Gender.MALE);
         Person child2 = new Person("Vich", Gender.MALE);
         Person child3 = new Person("Satya", Gender.FEMALE);
         partner.addChild(child1);
         partner.addChild(child2);
         partner.addChild(child3);
+
         Person child2Partner = new Person("Lika", Gender.FEMALE);
         child2.addPartner(child2Partner);
+
         Person grandChild = new Person("Vila", Gender.FEMALE);
         child2Partner.addChild(grandChild);
+
         List<Person> paternalUncles = new ArrayList<>();
         paternalUncles.add(child1);
 
@@ -343,5 +347,31 @@ public class PersonTest {
         paternalAunt.add(child3);
 
         assertEquals(paternalAunt, grandChild.findPaternalAunts());
+    }
+
+    @Test
+    public void shouldFindMaternalUncleForAPerson() {
+        Person person = new Person("Shan", Gender.MALE);
+        Person partner = new Person("Anga", Gender.FEMALE);
+        person.addPartner(partner);
+
+        Person child1 = new Person("Ish", Gender.MALE);
+        Person child2 = new Person("Vich", Gender.MALE);
+        Person child3 = new Person("Satya", Gender.FEMALE);
+        partner.addChild(child1);
+        partner.addChild(child2);
+        partner.addChild(child3);
+
+        Person child3Partner = new Person("Vyan", Gender.MALE);
+        child3.addPartner(child3Partner);
+
+        Person grandChild = new Person("Asva", Gender.MALE);
+        child3.addChild(grandChild);
+
+        List<Person> maternalUncles = new ArrayList<>();
+        maternalUncles.add(child1);
+        maternalUncles.add(child2);
+
+        assertEquals(maternalUncles, grandChild.findMaternalUncles());
     }
 }
