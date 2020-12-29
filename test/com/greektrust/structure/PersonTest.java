@@ -11,35 +11,35 @@ import static org.junit.Assert.*;
 
 public class PersonTest {
     @Test
-    public void isNameMatchShouldSayTrueWhenGivenNameMatchesWhenPersonIsMale() {
+    public void shouldSayTrueWhenGivenNameMatchesWhenPersonIsMale() {
         Person person = new Person("Shan", Gender.MALE);
 
         assertTrue(person.isNameMatch("Shan"));
     }
 
     @Test
-    public void isNameMatchShouldSayTrueWhenGivenNameMatchesWhenPersonIsFemale() {
+    public void shouldSayTrueWhenGivenNameMatchesWhenPersonIsFemale() {
         Person person = new Person("Anga", Gender.FEMALE);
 
         assertTrue(person.isNameMatch("Anga"));
     }
 
     @Test
-    public void isNameMatchShouldSayFalseWhenGivenNameDoesNotMatchesWhenPersonIsMale() {
+    public void shouldSayFalseWhenGivenNameDoesNotMatchesWhenPersonIsMale() {
         Person person = new Person("Shan", Gender.MALE);
 
         assertFalse(person.isNameMatch("Anga"));
     }
 
     @Test
-    public void isNameMatchShouldSayFalseWhenGivenNameDoesNotMatchesWhenPersonIsFemale() {
+    public void shouldSayFalseWhenGivenNameDoesNotMatchesWhenPersonIsFemale() {
         Person person = new Person("Anga", Gender.FEMALE);
 
         assertFalse(person.isNameMatch("Shan"));
     }
 
     @Test
-    public void isPartnerNameMatchShouldSayTrueWhenGivenNameMatchesWithPartnerNameWhenPersonIsMale() {
+    public void shouldSayTrueWhenGivenNameMatchesWithPartnerNameWhenPersonIsMale() {
         Person person = new Person("Shan", Gender.MALE);
         person.addPartner(new Person("Anga", Gender.FEMALE));
 
@@ -47,7 +47,7 @@ public class PersonTest {
     }
 
     @Test
-    public void isPartnerNameMatchShouldSayTrueWhenGivenNameMatchesWithPartnerNameWhenPersonIsFemale() {
+    public void shouldSayTrueWhenGivenNameMatchesWithPartnerNameWhenPersonIsFemale() {
         Person person = new Person("Anga", Gender.FEMALE);
         person.addPartner(new Person("Shan", Gender.MALE));
 
@@ -55,7 +55,7 @@ public class PersonTest {
     }
 
     @Test
-    public void isPartnerNameMatchShouldSayFalseWhenGivenNameNotMatchesWithPartnerNameWhenPersonIsMale() {
+    public void shouldSayFalseWhenGivenNameNotMatchesWithPartnerNameWhenPersonIsMale() {
         Person person = new Person("Shan", Gender.MALE);
         person.addPartner(new Person("Anga", Gender.FEMALE));
 
@@ -63,7 +63,7 @@ public class PersonTest {
     }
 
     @Test
-    public void isPartnerNameMatchShouldSayShouldSayFalseWhenGivenNameDoesNotMatchesWithPartnerNameWhenPersonIsFemale() {
+    public void shouldSayShouldSayFalseWhenGivenNameDoesNotMatchesWithPartnerNameWhenPersonIsFemale() {
         Person person = new Person("Anga", Gender.FEMALE);
         person.addPartner(new Person("Shan", Gender.MALE));
 
@@ -71,10 +71,11 @@ public class PersonTest {
     }
 
     @Test
-    public void isChildPresentShouldSayTrueWhenChildIsPresent() {
+    public void shouldSayTrueWhenChildIsPresent() {
         Person person = new Person("Shan", Gender.MALE);
         Person partner = new Person("Anga", Gender.FEMALE);
         person.addPartner(partner);
+
         partner.addChild(new Person("Vich", Gender.MALE));
         partner.addChild(new Person("Ish", Gender.MALE));
 
@@ -82,10 +83,11 @@ public class PersonTest {
     }
 
     @Test
-    public void isChildPresentShouldSayFalseWhenChildIsNotPresent() {
+    public void shouldSayFalseWhenChildIsNotPresent() {
         Person person = new Person("Shan", Gender.MALE);
         Person partner = new Person("Anga", Gender.FEMALE);
         person.addPartner(partner);
+
         partner.addChild(new Person("Vich", Gender.MALE));
         partner.addChild(new Person("Ish", Gender.MALE));
 
@@ -93,7 +95,7 @@ public class PersonTest {
     }
 
     @Test
-    public void findPersonShouldFindThePersonWithGivenNameWhenItsKingItselfAndGiveThatPerson() {
+    public void shouldFindThePersonWithGivenNameWhenItsKingItselfAndGiveThatPerson() {
         Person person = new Person("Shan", Gender.MALE);
         person.addPartner(new Person("Anga", Gender.FEMALE));
 
@@ -101,7 +103,7 @@ public class PersonTest {
     }
 
     @Test
-    public void findPersonShouldFindThePersonWithGivenNameWhenItsQueenItselfAndGiveThatPerson() {
+    public void shouldFindThePersonWithGivenNameWhenItsQueenItselfAndGiveThatPerson() {
         Person person = new Person("Shan", Gender.MALE);
         Person partner = new Person("Anga", Gender.FEMALE);
         person.addPartner(partner);
@@ -110,10 +112,11 @@ public class PersonTest {
     }
 
     @Test
-    public void findPersonShouldFindThePersonWithGivenNameWhenItsKingsOnlyChildAndGiveThatPerson() {
+    public void shouldFindThePersonWithGivenNameWhenItsKingsOnlyChildAndGiveThatPerson() {
         Person person = new Person("Shan", Gender.MALE);
         Person partner = new Person("Anga", Gender.FEMALE);
         person.addPartner(partner);
+
         Person ish = new Person("Ish", Gender.MALE);
         partner.addChild(ish);
 
@@ -121,10 +124,11 @@ public class PersonTest {
     }
 
     @Test
-    public void findPersonShouldFindThePersonWithGivenNameWhenItsOneOfKingsChildAndGiveThatPerson() {
+    public void shouldFindThePersonWithGivenNameWhenItsOneOfKingsChildAndGiveThatPerson() {
         Person person = new Person("Shan", Gender.MALE);
         Person partner = new Person("Anga", Gender.FEMALE);
         person.addPartner(partner);
+
         partner.addChild(new Person("Vich", Gender.MALE));
         Person ish = new Person("Ish", Gender.MALE);
         partner.addChild(ish);
@@ -133,14 +137,17 @@ public class PersonTest {
     }
 
     @Test
-    public void findPersonShouldFindThePersonWithGivenNameWhenItsOneOfKingsGrandChildAndGiveThatPerson() {
+    public void shouldFindThePersonWithGivenNameWhenItsOneOfKingsGrandChildAndGiveThatPerson() {
         Person person = new Person("Shan", Gender.MALE);
         Person partner = new Person("Anga", Gender.FEMALE);
         person.addPartner(partner);
+
         Person child = new Person("Satya", Gender.FEMALE);
         partner.addChild(child);
+
         Person childPartner = new Person("Vyan", Gender.MALE);
         child.addPartner(childPartner);
+
         Person grandChild = new Person("Asva", Gender.MALE);
         child.addChild(grandChild);
 
@@ -148,16 +155,20 @@ public class PersonTest {
     }
 
     @Test
-    public void findPersonShouldFindThePersonWithGivenNameWhenItsOneOfKingsGrandChildPartnerAndGiveThatPerson() {
+    public void shouldFindThePersonWithGivenNameWhenItsOneOfKingsGrandChildPartnerAndGiveThatPerson() {
         Person person = new Person("Shan", Gender.MALE);
         Person partner = new Person("Anga", Gender.FEMALE);
         person.addPartner(partner);
+
         Person child = new Person("Satya", Gender.FEMALE);
         partner.addChild(child);
+
         Person childPartner = new Person("Vyan", Gender.MALE);
         child.addPartner(childPartner);
+
         Person grandChild = new Person("Asva", Gender.MALE);
         child.addChild(grandChild);
+
         Person grandChildPartner = new Person("Satvy", Gender.FEMALE);
         grandChild.addPartner(grandChildPartner);
 
@@ -165,21 +176,21 @@ public class PersonTest {
     }
 
     @Test
-    public void addChildShouldSayCHILD_ADDITION_FAILEDWhenPersonIsNotAFemale() {
+    public void shouldSayCHILD_ADDITION_FAILEDWhenPersonIsNotAFemale() {
         Person person = new Person("Shan", Gender.MALE);
 
         assertEquals(Status.CHILD_ADDITION_FAILED, person.addChild(new Person("Divya", Gender.FEMALE)));
     }
 
     @Test
-    public void addChildShouldAddChildAndSayCHILD_ADDITION_SUCCEEDEDWhenPersonIsAFemale() {
+    public void shouldAddChildAndSayCHILD_ADDITION_SUCCEEDEDWhenPersonIsAFemale() {
         Person person = new Person("Anga", Gender.FEMALE);
 
         assertEquals(Status.CHILD_ADDITION_SUCCEEDED, person.addChild(new Person("Divya", Gender.FEMALE)));
     }
 
     @Test
-    public void getChildrenShouldGiveChildrenOfGivenFemalePerson() {
+    public void shouldGiveChildrenOfGivenFemalePerson() {
         Person person = new Person("Anga", Gender.FEMALE);
         Person child1 = new Person("Ish", Gender.MALE);
         Person child2 = new Person("Vich", Gender.MALE);
@@ -187,6 +198,7 @@ public class PersonTest {
         person.addChild(child1);
         person.addChild(child2);
         person.addChild(child3);
+
         ArrayList<Person> children = new ArrayList<>();
         children.add(child1);
         children.add(child2);
@@ -196,16 +208,20 @@ public class PersonTest {
     }
 
     @Test
-    public void getChildrenShouldGiveChildrenOfGivenMalePerson() {
+    public void shouldGiveChildrenOfGivenMalePerson() {
         Person person = new Person("Shan", Gender.MALE);
         Person partner = new Person("Anga", Gender.FEMALE);
         person.addPartner(partner);
+
         Person child1 = new Person("Ish", Gender.MALE);
         partner.addChild(child1);
+
         Person child2 = new Person("Vich", Gender.MALE);
         partner.addChild(child2);
+
         Person child3 = new Person("Satya", Gender.FEMALE);
         partner.addChild(child3);
+
         ArrayList<Person> children = new ArrayList<>();
         children.add(child1);
         children.add(child2);
@@ -215,30 +231,32 @@ public class PersonTest {
     }
 
     @Test
-    public void isFemaleShouldSayTrueWhenPersonIsFemale() {
+    public void shouldSayTrueWhenPersonIsFemale() {
         Person person = new Person("Anga", Gender.FEMALE);
 
         assertTrue(person.isFemale());
     }
 
     @Test
-    public void isFemaleShouldSayFalseWhenPersonIsNotFemale() {
+    public void shouldSayFalseWhenPersonIsNotFemale() {
         Person person = new Person("Shan", Gender.MALE);
 
         assertFalse(person.isFemale());
     }
 
     @Test
-    public void findSonShouldFindTheSonFromFather() {
+    public void shouldFindTheSonFromFather() {
         Person person = new Person("Shan", Gender.MALE);
         Person partner = new Person("Anga", Gender.FEMALE);
         person.addPartner(partner);
+
         Person child1 = new Person("Ish", Gender.MALE);
         Person child2 = new Person("Vich", Gender.MALE);
         Person child3 = new Person("Satya", Gender.FEMALE);
         partner.addChild(child1);
         partner.addChild(child2);
         partner.addChild(child3);
+
         List<Person> son = new ArrayList<>();
         son.add(child1);
         son.add(child2);
@@ -247,16 +265,18 @@ public class PersonTest {
     }
 
     @Test
-    public void findSonShouldFindTheSonFromMother() {
+    public void shouldFindTheSonFromMother() {
         Person person = new Person("Shan", Gender.MALE);
         Person partner = new Person("Anga", Gender.FEMALE);
         person.addPartner(partner);
+
         Person child1 = new Person("Ish", Gender.MALE);
         Person child2 = new Person("Vich", Gender.MALE);
         Person child3 = new Person("Satya", Gender.FEMALE);
         partner.addChild(child1);
         partner.addChild(child2);
         partner.addChild(child3);
+
         List<Person> son = new ArrayList<>();
         son.add(child1);
         son.add(child2);
@@ -265,16 +285,18 @@ public class PersonTest {
     }
 
     @Test
-    public void findDaughterShouldFindTheDaughtersForGivenFatherName() {
+    public void shouldFindTheDaughtersForGivenFatherName() {
         Person person = new Person("Shan", Gender.MALE);
         Person partner = new Person("Anga", Gender.FEMALE);
         person.addPartner(partner);
+
         Person child1 = new Person("Ish", Gender.MALE);
         Person child2 = new Person("Vich", Gender.MALE);
         Person child3 = new Person("Satya", Gender.FEMALE);
         partner.addChild(child1);
         partner.addChild(child2);
         partner.addChild(child3);
+
         List<Person> daughter = new ArrayList<>();
         daughter.add(child3);
 
@@ -282,16 +304,18 @@ public class PersonTest {
     }
 
     @Test
-    public void findSiblingsShouldFindTheSiblingsForGivenFatherName() {
+    public void shouldFindTheSiblingsForGivenFatherName() {
         Person person = new Person("Shan", Gender.MALE);
         Person partner = new Person("Anga", Gender.FEMALE);
         person.addPartner(partner);
+
         Person child1 = new Person("Ish", Gender.MALE);
         Person child2 = new Person("Vich", Gender.MALE);
         Person child3 = new Person("Satya", Gender.FEMALE);
         partner.addChild(child1);
         partner.addChild(child2);
         partner.addChild(child3);
+
         List<Person> siblings = new ArrayList<>();
         siblings.add(child1);
         siblings.add(child2);

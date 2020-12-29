@@ -13,7 +13,7 @@ import static org.junit.Assert.assertEquals;
 public class FamilyTest {
 
     @Test
-    public void addChildShouldSayPERSON_NOT_FOUNDWhenPersonDoesNotExistForGivenMotherName() {
+    public void shouldSayPERSON_NOT_FOUNDWhenPersonDoesNotExistForGivenMotherName() {
         Family family = new Family(new Person("Shan", Gender.MALE));
         Person child = new Person("Ish", Gender.MALE);
 
@@ -22,7 +22,7 @@ public class FamilyTest {
     }
 
     @Test
-    public void addChildShouldSayCHILD_ADDITION_FAILEDWhenGivenPersonNameIsNotFemale() {
+    public void shouldSayCHILD_ADDITION_FAILEDWhenGivenPersonNameIsNotFemale() {
         Family family = new Family(new Person("Shan", Gender.MALE));
         Person child = new Person("Ish", Gender.MALE);
 
@@ -31,7 +31,7 @@ public class FamilyTest {
     }
 
     @Test
-    public void addChildShouldSayCHILD_ADDITION_SUCCEEDEDWhenGivenPersonNameIsFemale() {
+    public void shouldSayCHILD_ADDITION_SUCCEEDEDWhenGivenPersonNameIsFemale() {
         Family family = new Family(new Person("Shan", Gender.MALE));
         Person partner = new Person("Anga", Gender.FEMALE);
         family.addPartner("Shan", partner);
