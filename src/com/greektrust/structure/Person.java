@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public class Person {
     private final String name;
-    private final ArrayList<Person> children;
+    private final ArrayList<Person> children = new ArrayList<>();
     private final Gender gender;
     private Person mother = null;
     private Person partner = null;
@@ -15,7 +15,6 @@ public class Person {
     public Person(String name, Gender gender) {
         this.name = name;
         this.gender = gender;
-        this.children = new ArrayList<>();
     }
 
     public boolean isNameMatch(String name) {
@@ -28,7 +27,7 @@ public class Person {
     }
 
     public Status addChild(Person child) {
-        if(this.gender!=Gender.FEMALE) {
+        if (this.gender != Gender.FEMALE) {
             return Status.CHILD_ADDITION_FAILED;
         }
         this.children.add(child);
@@ -36,8 +35,8 @@ public class Person {
         return Status.CHILD_ADDITION_SUCCEEDED;
     }
 
-    public boolean isPartnerNameMatch(String name) {
-        return this.partner.name.equals(name);
+    public boolean isPartner(String name) {
+        return this.partner != null && this.partner.name.equals(name);
     }
 
     public boolean isChildPresent(String name) {
@@ -49,22 +48,32 @@ public class Person {
         return false;
     }
 
-    public Person findInChild(String name) {
-        for (Person person : this.children) {
-            if (person.name.equals(name)) {
+    public Person findPerson(String name) {
+        if (this.isNameMatch(name)) {
+            return this;
+        }
+        if (this.isPartner(name)) {
+            return this.partner;
+        }
+
+        ArrayList<Person> children = this.getChildren();
+        for (Person child : children) {
+            Person person = child.findPerson(name);
+            if (person != null) {
                 return person;
             }
         }
         return null;
     }
 
-    public Person findPerson(String name) {
-        if (this.isNameMatch(name)) {
-            return this;
+    public ArrayList<Person> getChildren() {
+        if (this.partner == null || this.gender.isFemale()) {
+            return this.children;
         }
-        if (this.partner.isNameMatch(name)) {
-            return this.partner;
-        }
-        return this.findInChild(name);
+        return this.partner.children;
+    }
+
+    public boolean isFemale() {
+        return this.gender.isFemale();
     }
 }

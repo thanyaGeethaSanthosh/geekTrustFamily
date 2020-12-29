@@ -1,6 +1,7 @@
 package com.greektrust.structure;
 
 import com.greektrust.constants.Gender;
+import com.greektrust.constants.Status;
 
 public class Family {
     private final Person parent;
@@ -17,9 +18,12 @@ public class Family {
         return parent.equals(family.parent);
     }
 
-    public void addChild(String motherName, String childName, Gender gender) {
+    public Status addChild(String motherName, String childName, Gender gender) {
         Person mother = this.parent.findPerson(motherName);
-        mother.addChild(new Person(childName, gender));
+        if (mother == null) {
+            return Status.PERSON_NOT_FOUND;
+        }
+        return mother.addChild(new Person(childName, gender));
     }
 
     public void addPartner(String oldMemberName, String partnerName, Gender partnerGender) {
