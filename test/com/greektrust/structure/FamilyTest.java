@@ -220,4 +220,99 @@ public class FamilyTest {
 
         assertEquals(maternalAunts, family.findRelatives("Asva", Relationship.MATERNAL_AUNT));
     }
+
+    @Test
+    public void shouldFindSistersHusbandsAsBrotherInLawForAPerson() {
+        Person shan = new Person("Shan", Gender.MALE);
+        Family family = new Family(shan);
+        Person anga = new Person("Anga", Gender.FEMALE);
+        family.addPartner("Shan", anga);
+
+        Person vich = new Person("Vich", Gender.MALE);
+        Person satya = new Person("Satya", Gender.FEMALE);
+
+        family.addChild("Anga", vich);
+        family.addChild("Anga", satya);
+
+        Person vyan = new Person("Vyan", Gender.MALE);
+        family.addPartner("Satya", vyan);
+
+        List<Person> brothersInLaw = new ArrayList<>();
+        brothersInLaw.add(vyan);
+
+        assertEquals(brothersInLaw, family.findRelatives("Vich", Relationship.BROTHER_IN_LAW));
+
+    }
+
+    @Test
+    public void shouldFindBrothersOfPartnerAsBrotherInLawForAPerson() {
+        Person shan = new Person("Shan", Gender.MALE);
+        Family family = new Family(shan);
+        Person anga = new Person("Anga", Gender.FEMALE);
+        family.addPartner("Shan", anga);
+
+        Person vich = new Person("Vich", Gender.MALE);
+        Person satya = new Person("Satya", Gender.FEMALE);
+
+        family.addChild("Anga", vich);
+        family.addChild("Anga", satya);
+
+        Person vyan = new Person("Vyan", Gender.MALE);
+        family.addPartner("Satya", vyan);
+
+        List<Person> brothersInLaw = new ArrayList<>();
+        brothersInLaw.add(vich);
+
+        assertEquals(brothersInLaw, family.findRelatives("Vyan", Relationship.BROTHER_IN_LAW));
+
+    }
+
+
+    @Test
+    public void shouldFindBrothersWivesAsSisterInLawForAPerson() {
+        Person shan = new Person("Shan", Gender.MALE);
+        Family family = new Family(shan);
+        Person anga = new Person("Anga", Gender.FEMALE);
+        family.addPartner("Shan",anga);
+
+        Person vich = new Person("Vich", Gender.MALE);
+        Person satya = new Person("Satya", Gender.FEMALE);
+
+        family.addChild("Anga",vich);
+        family.addChild("Anga",satya);
+
+        Person lika = new Person("Lika", Gender.FEMALE);
+        family.addPartner("Vich",lika);
+
+        List<Person> sistersInLaw = new ArrayList<>();
+        sistersInLaw.add(lika);
+
+        assertEquals(sistersInLaw, family.findRelatives("Satya",Relationship.SISTER_IN_LAW));
+
+    }
+
+    @Test
+    public void shouldFindSistersOfPartnerAsSisterInLawForAPerson() {
+        Person shan = new Person("Shan", Gender.MALE);
+        Family family = new Family(shan);
+        Person anga = new Person("Anga", Gender.FEMALE);
+        family.addPartner("Shan", anga);
+
+        Person vich = new Person("Vich", Gender.MALE);
+        Person satya = new Person("Satya", Gender.FEMALE);
+
+        family.addChild("Anga", vich);
+        family.addChild("Anga", satya);
+
+        Person lika = new Person("Lika", Gender.FEMALE);
+        family.addPartner("Vich", lika);
+
+        List<Person> sistersInLaw = new ArrayList<>();
+        sistersInLaw.add(satya);
+
+        assertEquals(sistersInLaw, family.findRelatives("Lika", Relationship.SISTER_IN_LAW));
+
+    }
+
+
 }

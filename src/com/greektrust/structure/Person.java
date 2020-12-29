@@ -6,6 +6,7 @@ import com.greektrust.constants.Status;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class Person {
     private final String name;
@@ -113,5 +114,47 @@ public class Person {
     public List<Person> findMaternalAunts() {
         List<Person> siblingsOfMother = this.mother.findSiblings();
         return siblingsOfMother.stream().filter(Person::isFemale).collect(Collectors.toList());
+    }
+
+    public List<Person> findBrothersInLaw() {
+        ArrayList<Person> brothersInLaw = new ArrayList<>();
+        Stream<Person> marriedSisters = this.findSisters().stream().filter(person -> person.partner != null);
+        List<Person> husbandsOfSisters = marriedSisters.map(person -> person.partner).collect(Collectors.toList());
+        if (this.partner != null) {
+            List<Person> brothersOfPartner = this.partner.findBrother();
+            brothersInLaw.addAll(brothersOfPartner);
+        }
+
+        brothersInLaw.addAll(husbandsOfSisters);
+        return brothersInLaw;
+    }
+
+    private List<Person> findBrother() {
+        if (this.mother == null) {
+            return new ArrayList<>();
+        }
+        List<Person> sonsOfMother = this.mother.findSons();
+        return sonsOfMother.stream().filter(child -> !child.isNameMatch(this.name)).collect(Collectors.toList());
+    }
+
+    private List<Person> findSisters() {
+        if (this.mother == null) {
+            return new ArrayList<>();
+        }
+        List<Person> daughtersOfMother = this.mother.findDaughters();
+        return daughtersOfMother.stream().filter(child -> !child.isNameMatch(this.name)).collect(Collectors.toList());
+    }
+
+    public List<Person> findSistersInLaw() {
+        ArrayList<Person> sistersInLaw = new ArrayList<>();
+        Stream<Person> marriedBrothers = this.findBrother().stream().filter(person -> person.partner != null);
+        List<Person> wivesOfBrothers = marriedBrothers.map(person -> person.partner).collect(Collectors.toList());
+        if (this.partner != null) {
+            List<Person> sistersOfPartner = this.partner.findSisters();
+            sistersInLaw.addAll(sistersOfPartner);
+        }
+
+        sistersInLaw.addAll(wivesOfBrothers);
+        return sistersInLaw;
     }
 }

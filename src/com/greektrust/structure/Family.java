@@ -51,6 +51,12 @@ public class Family {
             case MATERNAL_AUNT:
                 relatives = person.findMaternalAunts();
                 break;
+            case BROTHER_IN_LAW:
+                relatives=person.findBrothersInLaw();
+                break;
+            case SISTER_IN_LAW:
+                relatives=person.findSistersInLaw();
+                break;
             default:
                 relatives = new ArrayList<>();
         }

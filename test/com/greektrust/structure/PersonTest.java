@@ -399,4 +399,91 @@ public class PersonTest {
 
         assertEquals(maternalAunt, grandChild.findMaternalAunts());
     }
+
+    @Test
+    public void shouldFindSistersHusbandsAsBrotherInLawForAPerson() {
+        Person shan = new Person("Shan", Gender.MALE);
+        Person anga = new Person("Anga", Gender.FEMALE);
+        shan.addPartner(anga);
+
+        Person vich = new Person("Vich", Gender.MALE);
+        Person satya = new Person("Satya", Gender.FEMALE);
+
+        anga.addChild(vich);
+        anga.addChild(satya);
+
+        Person vyan = new Person("Vyan", Gender.MALE);
+        satya.addPartner(vyan);
+
+        List<Person> brothersInLaw = new ArrayList<>();
+        brothersInLaw.add(vyan);
+
+        assertEquals(brothersInLaw, vich.findBrothersInLaw());
+
+    }
+
+    @Test
+    public void shouldFindBrothersOfPartnerAsBrotherInLawForAPerson() {
+        Person shan = new Person("Shan", Gender.MALE);
+        Person anga = new Person("Anga", Gender.FEMALE);
+        shan.addPartner(anga);
+
+        Person vich = new Person("Vich", Gender.MALE);
+        Person satya = new Person("Satya", Gender.FEMALE);
+        anga.addChild(vich);
+        anga.addChild(satya);
+
+        Person vyan = new Person("Vyan", Gender.MALE);
+        satya.addPartner(vyan);
+
+        List<Person> brothersInLaw = new ArrayList<>();
+        brothersInLaw.add(vich);
+
+        assertEquals(brothersInLaw, vyan.findBrothersInLaw());
+
+    }
+
+    @Test
+    public void shouldFindBrothersWivesAsSisterInLawForAPerson() {
+        Person shan = new Person("Shan", Gender.MALE);
+        Person anga = new Person("Anga", Gender.FEMALE);
+        shan.addPartner(anga);
+
+        Person vich = new Person("Vich", Gender.MALE);
+        Person satya = new Person("Satya", Gender.FEMALE);
+
+        anga.addChild(vich);
+        anga.addChild(satya);
+
+        Person lika = new Person("Lika", Gender.FEMALE);
+        vich.addPartner(lika);
+
+        List<Person> sistersInLaw = new ArrayList<>();
+        sistersInLaw.add(lika);
+
+        assertEquals(sistersInLaw, satya.findSistersInLaw());
+
+    }
+
+    @Test
+    public void shouldFindSistersOfPartnerAsSisterInLawForAPerson() {
+        Person shan = new Person("Shan", Gender.MALE);
+        Person anga = new Person("Anga", Gender.FEMALE);
+        shan.addPartner(anga);
+
+        Person vich = new Person("Vich", Gender.MALE);
+        Person satya = new Person("Satya", Gender.FEMALE);
+
+        anga.addChild(vich);
+        anga.addChild(satya);
+
+        Person lika = new Person("Lika", Gender.FEMALE);
+        vich.addPartner(lika);
+
+        List<Person> sistersInLaw = new ArrayList<>();
+        sistersInLaw.add(lika);
+
+        assertEquals(sistersInLaw, satya.findSistersInLaw());
+
+    }
 }
