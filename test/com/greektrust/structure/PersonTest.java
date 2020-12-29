@@ -10,24 +10,28 @@ public class PersonTest {
     @Test
     public void isNameMatchShouldSayTrueWhenGivenNameMatchesWhenPersonIsMale() {
         Person person = new Person("Shan", Gender.MALE);
+
         assertTrue(person.isNameMatch("Shan"));
     }
 
     @Test
     public void isNameMatchShouldSayTrueWhenGivenNameMatchesWhenPersonIsFemale() {
         Person person = new Person("Anga", Gender.FEMALE);
+
         assertTrue(person.isNameMatch("Anga"));
     }
 
     @Test
     public void isNameMatchShouldSayFalseWhenGivenNameDoesNotMatchesWhenPersonIsMale() {
         Person person = new Person("Shan", Gender.MALE);
+
         assertFalse(person.isNameMatch("Anga"));
     }
 
     @Test
     public void isNameMatchShouldSayFalseWhenGivenNameDoesNotMatchesWhenPersonIsFemale() {
         Person person = new Person("Anga", Gender.FEMALE);
+
         assertFalse(person.isNameMatch("Shan"));
     }
 
@@ -35,6 +39,7 @@ public class PersonTest {
     public void isPartnerNameMatchShouldSayTrueWhenGivenNameMatchesWithPartnerNameWhenPersonIsMale() {
         Person person = new Person("Shan", Gender.MALE);
         person.addPartner(new Person("Anga", Gender.FEMALE));
+
         assertTrue(person.isPartner("Anga"));
     }
 
@@ -42,6 +47,7 @@ public class PersonTest {
     public void isPartnerNameMatchShouldSayTrueWhenGivenNameMatchesWithPartnerNameWhenPersonIsFemale() {
         Person person = new Person("Anga", Gender.FEMALE);
         person.addPartner(new Person("Shan", Gender.MALE));
+
         assertTrue(person.isPartner("Shan"));
     }
 
@@ -49,6 +55,7 @@ public class PersonTest {
     public void isPartnerNameMatchShouldSayFalseWhenGivenNameNotMatchesWithPartnerNameWhenPersonIsMale() {
         Person person = new Person("Shan", Gender.MALE);
         person.addPartner(new Person("Anga", Gender.FEMALE));
+
         assertFalse(person.isPartner("Vich"));
     }
 
@@ -56,6 +63,7 @@ public class PersonTest {
     public void isPartnerNameMatchShouldSayShouldSayFalseWhenGivenNameDoesNotMatchesWithPartnerNameWhenPersonIsFemale() {
         Person person = new Person("Anga", Gender.FEMALE);
         person.addPartner(new Person("Shan", Gender.MALE));
+
         assertFalse(person.isPartner("Vich"));
     }
 
@@ -86,7 +94,6 @@ public class PersonTest {
         Person person = new Person("Shan", Gender.MALE);
         person.addPartner(new Person("Anga", Gender.FEMALE));
 
-
         assertEquals(person, person.findPerson("Shan"));
     }
 
@@ -107,7 +114,6 @@ public class PersonTest {
         Person ish = new Person("Ish", Gender.MALE);
         partner.addChild(ish);
 
-
         assertEquals(ish, person.findPerson("Ish"));
     }
 
@@ -119,7 +125,6 @@ public class PersonTest {
         partner.addChild(new Person("Vich", Gender.MALE));
         Person ish = new Person("Ish", Gender.MALE);
         partner.addChild(ish);
-
 
         assertEquals(ish, person.findPerson("Ish"));
     }
@@ -135,7 +140,6 @@ public class PersonTest {
         child.addPartner(childPartner);
         Person grandChild = new Person("Asva", Gender.MALE);
         child.addChild(grandChild);
-
 
         assertEquals(grandChild, person.findPerson("Asva"));
     }
@@ -154,19 +158,20 @@ public class PersonTest {
         Person grandChildPartner = new Person("Satvy", Gender.FEMALE);
         grandChild.addPartner(grandChildPartner);
 
-
         assertEquals(grandChildPartner, person.findPerson("Satvy"));
     }
 
     @Test
     public void addChildShouldSayCHILD_ADDITION_FAILEDWhenPersonIsNotAFemale() {
         Person person = new Person("Shan", Gender.MALE);
+
         assertEquals(Status.CHILD_ADDITION_FAILED, person.addChild(new Person("Divya", Gender.FEMALE)));
     }
 
     @Test
     public void addChildShouldAddChildAndSayCHILD_ADDITION_SUCCEEDEDWhenPersonIsAFemale() {
         Person person = new Person("Anga", Gender.FEMALE);
+
         assertEquals(Status.CHILD_ADDITION_SUCCEEDED, person.addChild(new Person("Divya", Gender.FEMALE)));
     }
 }
