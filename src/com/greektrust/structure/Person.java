@@ -109,4 +109,9 @@ public class Person {
         List<Person> siblingsOfMother = this.mother.findSiblings();
         return siblingsOfMother.stream().filter(person -> !person.isFemale()).collect(Collectors.toList());
     }
+
+    public List<Person> findMaternalAunts() {
+        List<Person> siblingsOfMother = this.mother.findSiblings();
+        return siblingsOfMother.stream().filter(Person::isFemale).collect(Collectors.toList());
+    }
 }
