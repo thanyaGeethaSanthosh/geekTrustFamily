@@ -31,4 +31,10 @@ public class Family {
         Stream<Person> personStream = person.getChildren().stream().filter(child -> !child.isFemale());
         return personStream.collect(Collectors.toList());
     }
+
+    public List<Person> findDaughter(String name) {
+        Person person = this.familyHead.findPerson(name);
+        Stream<Person> personStream = person.getChildren().stream().filter(Person::isFemale);
+        return personStream.collect(Collectors.toList());
+    }
 }

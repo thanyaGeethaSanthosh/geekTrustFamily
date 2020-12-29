@@ -77,4 +77,22 @@ public class FamilyTest {
 
         assertEquals(son, family.findSon("Shan"));
     }
+
+    @Test
+    public void findDaughterShouldFindTheSonForGivenFatherName() {
+        Person person = new Person("Shan", Gender.MALE);
+        Family family = new Family(person);
+        Person partner = new Person("Anga", Gender.FEMALE);
+        family.addPartner("Shan", partner);
+        Person child1 = new Person("Ish", Gender.MALE);
+        Person child2 = new Person("Vich", Gender.MALE);
+        Person child3 = new Person("Satya", Gender.FEMALE);
+        family.addChild("Anga", child1);
+        family.addChild("Anga", child2);
+        family.addChild("Anga", child3);
+        List<Person> daughter = new ArrayList<>();
+        daughter.add(child3);
+
+        assertEquals(daughter, family.findDaughter("Shan"));
+    }
 }
