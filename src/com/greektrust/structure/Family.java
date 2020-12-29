@@ -36,8 +36,11 @@ public class Family {
             case DAUGHTER:
                 relatives = person.findDaughters();
                 break;
-            case SIBLINGS:
+            case SIBLING:
                 relatives = person.findSiblings();
+                break;
+            case PATERNAL_UNCLE:
+                relatives = person.findPaternalUncles();
                 break;
             default:
                 relatives = new ArrayList<>();

@@ -1,5 +1,5 @@
 package com.greektrust.constants;
 
 public enum Relationship {
-    DAUGHTER, SIBLINGS, SON
+    DAUGHTER, SIBLING, PATERNAL_UNCLE, SON
 }
