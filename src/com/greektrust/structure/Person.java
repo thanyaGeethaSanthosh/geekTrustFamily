@@ -73,7 +73,7 @@ public class Person {
         return this.partner.children;
     }
 
-    public boolean isFemale() {
+    public boolean isFemale(){
         return this.gender.isFemale();
     }
 }

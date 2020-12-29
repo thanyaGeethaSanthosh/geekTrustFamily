@@ -4,6 +4,8 @@ import com.greektrust.constants.Gender;
 import com.greektrust.constants.Status;
 import org.junit.Test;
 
+import java.util.ArrayList;
+
 import static org.junit.Assert.*;
 
 public class PersonTest {
@@ -173,5 +175,55 @@ public class PersonTest {
         Person person = new Person("Anga", Gender.FEMALE);
 
         assertEquals(Status.CHILD_ADDITION_SUCCEEDED, person.addChild(new Person("Divya", Gender.FEMALE)));
+    }
+
+    @Test
+    public void getChildrenShouldGiveChildrenOfGivenFemalePerson() {
+        Person person = new Person("Anga", Gender.FEMALE);
+        Person child1 = new Person("Ish", Gender.MALE);
+        Person child2 = new Person("Vich", Gender.MALE);
+        Person child3= new Person("Satya", Gender.FEMALE);
+        person.addChild(child1);
+        person.addChild(child2);
+        person.addChild(child3);
+        ArrayList<Person> children = new ArrayList<>();
+        children.add(child1);
+        children.add(child2);
+        children.add(child3);
+
+        assertEquals(children,person.getChildren());
+    }
+
+    @Test
+    public void getChildrenShouldGiveChildrenOfGivenMalePerson() {
+        Person person = new Person("Shan", Gender.MALE);
+        Person partner = new Person("Anga", Gender.FEMALE);
+        person.addPartner(partner);
+        Person child1 = new Person("Ish", Gender.MALE);
+        partner.addChild(child1);
+        Person child2 = new Person("Vich", Gender.MALE);
+        partner.addChild(child2);
+        Person child3 = new Person("Satya", Gender.FEMALE);
+        partner.addChild(child3);
+        ArrayList<Person> children = new ArrayList<>();
+        children.add(child1);
+        children.add(child2);
+        children.add(child3);
+
+        assertEquals(children, person.getChildren());
+    }
+
+    @Test
+    public void isFemaleShouldSayTrueWhenPersonIsFemale() {
+        Person person = new Person("Anga", Gender.FEMALE);
+
+        assertTrue(person.isFemale());
+    }
+
+    @Test
+    public void isFemaleShouldSayFalseWhenPersonIsNotFemale() {
+        Person person = new Person("Shan", Gender.MALE);
+
+        assertFalse(person.isFemale());
     }
 }
