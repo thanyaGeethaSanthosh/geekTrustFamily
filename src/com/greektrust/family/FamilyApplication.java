@@ -6,6 +6,7 @@ import com.greektrust.constants.Status;
 import com.greektrust.io.FileScanner;
 import com.greektrust.io.Printer;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -75,23 +76,34 @@ public class FamilyApplication {
         }
     }
 
-    private void parseAndExecute(String command) {
-        String[] arguments = command.split(" ");
-        if (arguments[0].equals("ADD_CHILD")) {
-            String mother = arguments[1];
-            String childName = arguments[2];
-            Gender gender = Gender.valueOf(arguments[3].toUpperCase());
-            Person child = new Person(childName, gender);
-            Status status = this.family.addChild(mother, child);
+    private void parseAndExecute(String clientCommand) {
+        String[] commandAndArgument = clientCommand.split(" ");
+        String command = commandAndArgument[0];
+        String[] arguments = Arrays.copyOfRange(commandAndArgument, 1, commandAndArgument.length);
+
+        if (command.equals("ADD_CHILD")) {
+            Status status = this.handleChildAddition(arguments);
             this.showResult(status);
         }
-        if (arguments[0].equals("GET_RELATIONSHIP")) {
-            String relationValue = arguments[2].replace("-", "_").toUpperCase();
-            Relationship relationship = Relationship.valueOf(relationValue);
-            String personName = arguments[1];
-            List<Person> relatives = this.family.findRelatives(personName, relationship);
+        if (command.equals("GET_RELATIONSHIP")) {
+            List<Person> relatives = this.handleGetRelationship(arguments);
             this.showResult(relatives);
         }
+    }
+
+    private List<Person> handleGetRelationship(String[] arguments) {
+        String personName = arguments[0];
+        String relationValue = arguments[1].replace("-", "_").toUpperCase();
+        Relationship relationship = Relationship.valueOf(relationValue);
+        return this.family.findRelatives(personName, relationship);
+    }
+
+    private Status handleChildAddition(String[] arguments) {
+        String motherName = arguments[0];
+        String childName = arguments[1];
+        Gender gender = Gender.valueOf(arguments[2].toUpperCase());
+        Person child = new Person(childName, gender);
+        return this.family.addChild(motherName, child);
     }
 
     private void showResult(Status status) {
