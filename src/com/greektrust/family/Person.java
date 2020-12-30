@@ -1,4 +1,4 @@
-package com.greektrust.structure;
+package com.greektrust.family;
 
 import com.greektrust.constants.Gender;
 import com.greektrust.constants.Status;
@@ -156,5 +156,10 @@ public class Person {
 
         sistersInLaw.addAll(wivesOfBrothers);
         return sistersInLaw;
+    }
+
+    @Override
+    public String toString() {
+        return  this.name;
     }
 }

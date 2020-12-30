@@ -1,4 +1,4 @@
-package com.greektrust.structure;
+package com.greektrust.family;
 
 import com.greektrust.constants.Gender;
 import com.greektrust.constants.Status;

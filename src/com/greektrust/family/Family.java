@@ -1,4 +1,4 @@
-package com.greektrust.structure;
+package com.greektrust.family;
 
 import com.greektrust.constants.Relationship;
 import com.greektrust.constants.Status;
