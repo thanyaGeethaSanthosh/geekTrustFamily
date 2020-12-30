@@ -3,7 +3,6 @@ package com.greektrust.structure;
 import com.greektrust.constants.Relationship;
 import com.greektrust.constants.Status;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Family {
@@ -28,38 +27,6 @@ public class Family {
 
     public List<Person> findRelatives(String personName, Relationship relation) {
         Person person = this.familyHead.findPerson(personName);
-        List<Person> relatives;
-        switch (relation) {
-            case SON:
-                relatives = person.findSons();
-                break;
-            case DAUGHTER:
-                relatives = person.findDaughters();
-                break;
-            case SIBLING:
-                relatives = person.findSiblings();
-                break;
-            case PATERNAL_UNCLE:
-                relatives = person.findPaternalUncles();
-                break;
-            case PATERNAL_AUNT:
-                relatives = person.findPaternalAunts();
-                break;
-            case MATERNAL_UNCLE:
-                relatives = person.findMaternalUncles();
-                break;
-            case MATERNAL_AUNT:
-                relatives = person.findMaternalAunts();
-                break;
-            case BROTHER_IN_LAW:
-                relatives=person.findBrothersInLaw();
-                break;
-            case SISTER_IN_LAW:
-                relatives=person.findSistersInLaw();
-                break;
-            default:
-                relatives = new ArrayList<>();
-        }
-        return relatives;
+        return relation.findRelatives(person);
     }
 }
