@@ -15,7 +15,7 @@ public enum Relationship {
         public List<Person> findRelatives(Person person) {
             return person.findSons();
         }
-    }, SIBLING {
+    }, SIBLINGS {
         @Override
         public List<Person> findRelatives(Person person) {
             return person.findSiblings();

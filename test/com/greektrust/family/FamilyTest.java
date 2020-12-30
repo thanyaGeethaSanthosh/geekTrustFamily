@@ -1,4 +1,4 @@
-package com.greektrust.structure;
+package com.greektrust.family;
 
 import com.greektrust.constants.Gender;
 import com.greektrust.constants.Relationship;
@@ -113,7 +113,7 @@ public class FamilyTest {
         siblings.add(child1);
         siblings.add(child2);
 
-        assertEquals(siblings, family.findRelatives("Satya", Relationship.SIBLING));
+        assertEquals(siblings, family.findRelatives("Satya", Relationship.SIBLINGS));
     }
 
     @Test
