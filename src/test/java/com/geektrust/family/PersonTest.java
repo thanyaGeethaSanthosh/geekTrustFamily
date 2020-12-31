@@ -1,7 +1,7 @@
 package com.geektrust.family;
 
-import com.geektrust.constants.Gender;
 import com.geektrust.constants.ChildAdditionStatus;
+import com.geektrust.constants.Gender;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -68,30 +68,6 @@ public class PersonTest {
         person.addPartner(new Person("Shan", Gender.MALE));
 
         assertFalse(person.isPartner("Vich"));
-    }
-
-    @Test
-    public void shouldSayTrueWhenChildIsPresent() {
-        Person person = new Person("Shan", Gender.MALE);
-        Person partner = new Person("Anga", Gender.FEMALE);
-        person.addPartner(partner);
-
-        partner.addChild(new Person("Vich", Gender.MALE));
-        partner.addChild(new Person("Ish", Gender.MALE));
-
-        assertTrue(partner.isChildPresent("Ish"));
-    }
-
-    @Test
-    public void shouldSayFalseWhenChildIsNotPresent() {
-        Person person = new Person("Shan", Gender.MALE);
-        Person partner = new Person("Anga", Gender.FEMALE);
-        person.addPartner(partner);
-
-        partner.addChild(new Person("Vich", Gender.MALE));
-        partner.addChild(new Person("Ish", Gender.MALE));
-
-        assertFalse(person.isChildPresent("Anga"));
     }
 
     @Test
@@ -187,47 +163,6 @@ public class PersonTest {
         Person person = new Person("Anga", Gender.FEMALE);
 
         assertEquals(ChildAdditionStatus.CHILD_ADDITION_SUCCEEDED, person.addChild(new Person("Divya", Gender.FEMALE)));
-    }
-
-    @Test
-    public void shouldGiveChildrenOfGivenFemalePerson() {
-        Person person = new Person("Anga", Gender.FEMALE);
-        Person child1 = new Person("Ish", Gender.MALE);
-        Person child2 = new Person("Vich", Gender.MALE);
-        Person child3 = new Person("Satya", Gender.FEMALE);
-        person.addChild(child1);
-        person.addChild(child2);
-        person.addChild(child3);
-
-        ArrayList<Person> children = new ArrayList<>();
-        children.add(child1);
-        children.add(child2);
-        children.add(child3);
-
-        assertEquals(children, person.getChildren());
-    }
-
-    @Test
-    public void shouldGiveChildrenOfGivenMalePerson() {
-        Person person = new Person("Shan", Gender.MALE);
-        Person partner = new Person("Anga", Gender.FEMALE);
-        person.addPartner(partner);
-
-        Person child1 = new Person("Ish", Gender.MALE);
-        partner.addChild(child1);
-
-        Person child2 = new Person("Vich", Gender.MALE);
-        partner.addChild(child2);
-
-        Person child3 = new Person("Satya", Gender.FEMALE);
-        partner.addChild(child3);
-
-        ArrayList<Person> children = new ArrayList<>();
-        children.add(child1);
-        children.add(child2);
-        children.add(child3);
-
-        assertEquals(children, person.getChildren());
     }
 
     @Test

@@ -1,7 +1,7 @@
 package com.geektrust.family;
 
-import com.geektrust.constants.Relationship;
 import com.geektrust.constants.ChildAdditionStatus;
+import com.geektrust.constants.Relationship;
 import com.geektrust.exceptions.PersonNotFountException;
 
 import java.util.List;

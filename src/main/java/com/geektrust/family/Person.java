@@ -1,10 +1,11 @@
 package com.geektrust.family;
 
-import com.geektrust.constants.Gender;
 import com.geektrust.constants.ChildAdditionStatus;
+import com.geektrust.constants.Gender;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -24,9 +25,12 @@ public class Person {
         return this.name.equals(name);
     }
 
-    public void addPartner(Person partner) {
-        this.partner = partner;
-        partner.partner = this;
+    public boolean isPartner(String name) {
+        return this.partner != null && this.partner.name.equals(name);
+    }
+
+    public boolean isFemale() {
+        return this.gender.isFemale();
     }
 
     public ChildAdditionStatus addChild(Person child) {
@@ -38,17 +42,9 @@ public class Person {
         return ChildAdditionStatus.CHILD_ADDITION_SUCCEEDED;
     }
 
-    public boolean isPartner(String name) {
-        return this.partner != null && this.partner.name.equals(name);
-    }
-
-    public boolean isChildPresent(String name) {
-        for (Person person : this.children) {
-            if (person.isNameMatch(name)) {
-                return true;
-            }
-        }
-        return false;
+    public void addPartner(Person partner) {
+        this.partner = partner;
+        partner.partner = this;
     }
 
     public Person findPerson(String name) {
@@ -69,87 +65,61 @@ public class Person {
         return null;
     }
 
-    public ArrayList<Person> getChildren() {
-        if (this.partner == null || this.gender.isFemale()) {
-            return this.children;
-        }
-        return this.partner.children;
+    public List<Person> findSons() {
+        ArrayList<Person> children = this.getChildren();
+        return this.getFilteredList(children, person -> !person.isFemale());
     }
 
-    public boolean isFemale() {
-        return this.gender.isFemale();
+
+    public List<Person> findDaughters() {
+        ArrayList<Person> children = this.getChildren();
+        return this.getFilteredList(children, Person::isFemale);
     }
 
     public List<Person> findSiblings() {
         ArrayList<Person> children = this.mother.getChildren();
-        return children.stream().filter(child -> !child.isNameMatch(this.name)).collect(Collectors.toList());
-    }
-
-    public List<Person> findSons() {
-        ArrayList<Person> children = this.getChildren();
-        return children.stream().filter(person -> !person.isFemale()).collect(Collectors.toList());
-
-    }
-
-    public List<Person> findDaughters() {
-        ArrayList<Person> children = this.getChildren();
-        return children.stream().filter(Person::isFemale).collect(Collectors.toList());
+        return this.getFilteredList(children, child -> !child.isNameMatch(this.name));
     }
 
     public List<Person> findPaternalUncles() {
         List<Person> siblingsOfFather = this.mother.partner.findSiblings();
-        return siblingsOfFather.stream().filter(person -> !person.isFemale()).collect(Collectors.toList());
+        return this.getFilteredList(siblingsOfFather, person -> !person.isFemale());
     }
 
     public List<Person> findPaternalAunts() {
         List<Person> siblingsOfFather = this.mother.partner.findSiblings();
-        return siblingsOfFather.stream().filter(Person::isFemale).collect(Collectors.toList());
+        return this.getFilteredList(siblingsOfFather, Person::isFemale);
     }
 
     public List<Person> findMaternalUncles() {
         List<Person> siblingsOfMother = this.mother.findSiblings();
-        return siblingsOfMother.stream().filter(person -> !person.isFemale()).collect(Collectors.toList());
+        return this.getFilteredList(siblingsOfMother, person -> !person.isFemale());
     }
 
     public List<Person> findMaternalAunts() {
         List<Person> siblingsOfMother = this.mother.findSiblings();
-        return siblingsOfMother.stream().filter(Person::isFemale).collect(Collectors.toList());
+        return this.getFilteredList(siblingsOfMother, Person::isFemale);
     }
 
     public List<Person> findBrothersInLaw() {
         ArrayList<Person> brothersInLaw = new ArrayList<>();
-        Stream<Person> marriedSisters = this.findSisters().stream().filter(person -> person.partner != null);
+        Stream<Person> marriedSisters = this.findSisters().stream().filter(Person::isMarried);
         List<Person> husbandsOfSisters = marriedSisters.map(person -> person.partner).collect(Collectors.toList());
-        if (this.partner != null) {
-            List<Person> brothersOfPartner = this.partner.findBrother();
+
+        if (this.isMarried()) {
+            List<Person> brothersOfPartner = this.partner.findBrothers();
             brothersInLaw.addAll(brothersOfPartner);
         }
-
         brothersInLaw.addAll(husbandsOfSisters);
         return brothersInLaw;
     }
 
-    private List<Person> findBrother() {
-        if (this.mother == null) {
-            return new ArrayList<>();
-        }
-        List<Person> sonsOfMother = this.mother.findSons();
-        return sonsOfMother.stream().filter(child -> !child.isNameMatch(this.name)).collect(Collectors.toList());
-    }
-
-    private List<Person> findSisters() {
-        if (this.mother == null) {
-            return new ArrayList<>();
-        }
-        List<Person> daughtersOfMother = this.mother.findDaughters();
-        return daughtersOfMother.stream().filter(child -> !child.isNameMatch(this.name)).collect(Collectors.toList());
-    }
-
     public List<Person> findSistersInLaw() {
         ArrayList<Person> sistersInLaw = new ArrayList<>();
-        Stream<Person> marriedBrothers = this.findBrother().stream().filter(person -> person.partner != null);
+        Stream<Person> marriedBrothers = this.findBrothers().stream().filter(Person::isMarried);
         List<Person> wivesOfBrothers = marriedBrothers.map(person -> person.partner).collect(Collectors.toList());
-        if (this.partner != null) {
+
+        if (this.isMarried()) {
             List<Person> sistersOfPartner = this.partner.findSisters();
             sistersInLaw.addAll(sistersOfPartner);
         }
@@ -160,6 +130,39 @@ public class Person {
 
     @Override
     public String toString() {
-        return  this.name;
+        return this.name;
+    }
+
+    private List<Person> getFilteredList(List<Person> people, Predicate<Person> predicate) {
+        return people.stream().filter(predicate).collect(Collectors.toList());
+    }
+
+    private List<Person> findSisters() {
+        if (this.mother == null) {
+            return new ArrayList<>();
+        }
+
+        List<Person> siblings = this.findSiblings();
+        return this.getFilteredList(siblings, Person::isFemale);
+    }
+
+    private List<Person> findBrothers() {
+        if (this.mother == null) {
+            return new ArrayList<>();
+        }
+
+        List<Person> siblings = this.findSiblings();
+        return this.getFilteredList(siblings, person -> !person.isFemale());
+    }
+
+    private boolean isMarried() {
+        return this.partner != null;
+    }
+
+    private ArrayList<Person> getChildren() {
+        if (!this.isMarried() || this.gender.isFemale()) {
+            return this.children;
+        }
+        return this.partner.children;
     }
 }
