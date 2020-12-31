@@ -160,7 +160,6 @@ public class FamilyApplicationTest {
         familyApplication.execute();
 
         verify(printer).print("Satya");
-
     }
 
     @Test

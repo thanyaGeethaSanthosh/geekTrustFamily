@@ -27,7 +27,6 @@ public class FamilyTest {
         Person child = new Person("Ish", Gender.MALE);
 
         assertEquals(Status.CHILD_ADDITION_FAILED, family.addChild("Shan", child));
-
     }
 
     @Test
@@ -38,7 +37,6 @@ public class FamilyTest {
         Person child = new Person("Ish", Gender.MALE);
 
         assertEquals(Status.CHILD_ADDITION_SUCCEEDED, family.addChild("Anga", child));
-
     }
 
     @Test
@@ -241,7 +239,6 @@ public class FamilyTest {
         brothersInLaw.add(vyan);
 
         assertEquals(brothersInLaw, family.findRelatives("Vich", Relationship.BROTHER_IN_LAW));
-
     }
 
     @Test
@@ -264,7 +261,6 @@ public class FamilyTest {
         brothersInLaw.add(vich);
 
         assertEquals(brothersInLaw, family.findRelatives("Vyan", Relationship.BROTHER_IN_LAW));
-
     }
 
 
@@ -273,22 +269,21 @@ public class FamilyTest {
         Person shan = new Person("Shan", Gender.MALE);
         Family family = new Family(shan);
         Person anga = new Person("Anga", Gender.FEMALE);
-        family.addPartner("Shan",anga);
+        family.addPartner("Shan", anga);
 
         Person vich = new Person("Vich", Gender.MALE);
         Person satya = new Person("Satya", Gender.FEMALE);
 
-        family.addChild("Anga",vich);
-        family.addChild("Anga",satya);
+        family.addChild("Anga", vich);
+        family.addChild("Anga", satya);
 
         Person lika = new Person("Lika", Gender.FEMALE);
-        family.addPartner("Vich",lika);
+        family.addPartner("Vich", lika);
 
         List<Person> sistersInLaw = new ArrayList<>();
         sistersInLaw.add(lika);
 
-        assertEquals(sistersInLaw, family.findRelatives("Satya",Relationship.SISTER_IN_LAW));
-
+        assertEquals(sistersInLaw, family.findRelatives("Satya", Relationship.SISTER_IN_LAW));
     }
 
     @Test
@@ -311,7 +306,6 @@ public class FamilyTest {
         sistersInLaw.add(satya);
 
         assertEquals(sistersInLaw, family.findRelatives("Lika", Relationship.SISTER_IN_LAW));
-
     }
 
     @Test
@@ -322,8 +316,5 @@ public class FamilyTest {
         family.addPartner("Shan", anga);
 
         assertNull(family.findRelatives("Lika", Relationship.SISTER_IN_LAW));
-
     }
-
-
 }
