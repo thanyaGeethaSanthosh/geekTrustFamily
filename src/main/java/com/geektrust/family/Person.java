@@ -1,7 +1,7 @@
 package com.geektrust.family;
 
 import com.geektrust.constants.Gender;
-import com.geektrust.constants.Status;
+import com.geektrust.constants.ChildAdditionStatus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,13 +29,13 @@ public class Person {
         partner.partner = this;
     }
 
-    public Status addChild(Person child) {
+    public ChildAdditionStatus addChild(Person child) {
         if (this.gender != Gender.FEMALE) {
-            return Status.CHILD_ADDITION_FAILED;
+            return ChildAdditionStatus.CHILD_ADDITION_FAILED;
         }
         this.children.add(child);
         child.mother = this;
-        return Status.CHILD_ADDITION_SUCCEEDED;
+        return ChildAdditionStatus.CHILD_ADDITION_SUCCEEDED;
     }
 
     public boolean isPartner(String name) {

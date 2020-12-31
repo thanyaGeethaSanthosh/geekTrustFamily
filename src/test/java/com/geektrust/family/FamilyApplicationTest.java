@@ -1,5 +1,6 @@
 package com.geektrust.family;
 
+import com.geektrust.exceptions.PersonNotFountException;
 import com.geektrust.io.FileScanner;
 import com.geektrust.io.Printer;
 import org.junit.Test;
@@ -9,7 +10,7 @@ import static org.mockito.Mockito.*;
 public class FamilyApplicationTest {
 
     @Test
-    public void shouldExecuteAndPrintResultForValidChildAddition() {
+    public void shouldExecuteAndPrintResultForValidChildAddition() throws PersonNotFountException {
         Printer printer = mock(Printer.class);
         FileScanner scanner = mock(FileScanner.class);
         when(scanner.hasNext()).thenReturn(true, false);
@@ -23,7 +24,7 @@ public class FamilyApplicationTest {
     }
 
     @Test
-    public void shouldExecuteAndPrintResultForPersonNotFound() {
+    public void shouldExecuteAndPrintResultForPersonNotFound() throws PersonNotFountException {
         Printer printer = mock(Printer.class);
         FileScanner scanner = mock(FileScanner.class);
         when(scanner.hasNext()).thenReturn(true, false);
@@ -37,7 +38,7 @@ public class FamilyApplicationTest {
     }
 
     @Test
-    public void shouldExecuteAndPrintResultForFailedChildAddition() {
+    public void shouldExecuteAndPrintResultForFailedChildAddition() throws PersonNotFountException {
         Printer printer = mock(Printer.class);
         FileScanner scanner = mock(FileScanner.class);
         when(scanner.hasNext()).thenReturn(true, false);
@@ -51,7 +52,7 @@ public class FamilyApplicationTest {
     }
 
     @Test
-    public void shouldFindAndPrintSiblingsList() {
+    public void shouldFindAndPrintSiblingsList() throws PersonNotFountException {
         Printer printer = mock(Printer.class);
         FileScanner scanner = mock(FileScanner.class);
         when(scanner.hasNext()).thenReturn(true, false);
@@ -65,7 +66,7 @@ public class FamilyApplicationTest {
     }
 
     @Test
-    public void shouldFindAndPrintSonsListForFatherName() {
+    public void shouldFindAndPrintSonsListForFatherName() throws PersonNotFountException {
         Printer printer = mock(Printer.class);
         FileScanner scanner = mock(FileScanner.class);
         when(scanner.hasNext()).thenReturn(true, false);
@@ -79,7 +80,7 @@ public class FamilyApplicationTest {
     }
 
     @Test
-    public void shouldFindAndPrintDaughtersListForMotherName() {
+    public void shouldFindAndPrintDaughtersListForMotherName() throws PersonNotFountException {
         Printer printer = mock(Printer.class);
         FileScanner scanner = mock(FileScanner.class);
         when(scanner.hasNext()).thenReturn(true, false);
@@ -93,7 +94,7 @@ public class FamilyApplicationTest {
     }
 
     @Test
-    public void shouldFindAndPrintPaternalUncleForGivenPersonName() {
+    public void shouldFindAndPrintPaternalUncleForGivenPersonName() throws PersonNotFountException {
         Printer printer = mock(Printer.class);
         FileScanner scanner = mock(FileScanner.class);
         when(scanner.hasNext()).thenReturn(true, false);
@@ -107,7 +108,7 @@ public class FamilyApplicationTest {
     }
 
     @Test
-    public void shouldFindAndPrintMaternalUncleForGivenPersonName() {
+    public void shouldFindAndPrintMaternalUncleForGivenPersonName() throws PersonNotFountException {
         Printer printer = mock(Printer.class);
         FileScanner scanner = mock(FileScanner.class);
         when(scanner.hasNext()).thenReturn(true, false);
@@ -121,7 +122,7 @@ public class FamilyApplicationTest {
     }
 
     @Test
-    public void shouldFindAndPrintPaternalAuntForGivenPersonName() {
+    public void shouldFindAndPrintPaternalAuntForGivenPersonName() throws PersonNotFountException {
         Printer printer = mock(Printer.class);
         FileScanner scanner = mock(FileScanner.class);
         when(scanner.hasNext()).thenReturn(true, false);
@@ -135,7 +136,7 @@ public class FamilyApplicationTest {
     }
 
     @Test
-    public void shouldFindAndPrintMaternalAuntForGivenPersonName() {
+    public void shouldFindAndPrintMaternalAuntForGivenPersonName() throws PersonNotFountException {
         Printer printer = mock(Printer.class);
         FileScanner scanner = mock(FileScanner.class);
         when(scanner.hasNext()).thenReturn(true, false);
@@ -149,7 +150,7 @@ public class FamilyApplicationTest {
     }
 
     @Test
-    public void shouldFindAndPrintSistersOfHusbandAsSisterInLawForGivenPersonName() {
+    public void shouldFindAndPrintSistersOfHusbandAsSisterInLawForGivenPersonName() throws PersonNotFountException {
         Printer printer = mock(Printer.class);
         FileScanner scanner = mock(FileScanner.class);
         when(scanner.hasNext()).thenReturn(true, false);
@@ -163,7 +164,7 @@ public class FamilyApplicationTest {
     }
 
     @Test
-    public void shouldFindAndPrintWifeOfBrothersAsSisterInLawForGivenPersonName() {
+    public void shouldFindAndPrintWifeOfBrothersAsSisterInLawForGivenPersonName() throws PersonNotFountException {
         Printer printer = mock(Printer.class);
         FileScanner scanner = mock(FileScanner.class);
         when(scanner.hasNext()).thenReturn(true, false);
@@ -177,7 +178,7 @@ public class FamilyApplicationTest {
     }
 
     @Test
-    public void shouldFindAndPrintBrothersOfWifeAsBrotherInLawForGivenPersonName() {
+    public void shouldFindAndPrintBrothersOfWifeAsBrotherInLawForGivenPersonName() throws PersonNotFountException {
         Printer printer = mock(Printer.class);
         FileScanner scanner = mock(FileScanner.class);
         when(scanner.hasNext()).thenReturn(true, false);
@@ -191,7 +192,7 @@ public class FamilyApplicationTest {
     }
 
     @Test
-    public void shouldFindAndPrintBrothersOfHusbandAsBrotherInLawForGivenPersonName() {
+    public void shouldFindAndPrintBrothersOfHusbandAsBrotherInLawForGivenPersonName() throws PersonNotFountException {
         Printer printer = mock(Printer.class);
         FileScanner scanner = mock(FileScanner.class);
         when(scanner.hasNext()).thenReturn(true, false);
@@ -205,7 +206,7 @@ public class FamilyApplicationTest {
     }
 
     @Test
-    public void shouldFindAndPrintHusbandOfSistersAsBrotherInLawForGivenPersonName() {
+    public void shouldFindAndPrintHusbandOfSistersAsBrotherInLawForGivenPersonName() throws PersonNotFountException {
         Printer printer = mock(Printer.class);
         FileScanner scanner = mock(FileScanner.class);
         when(scanner.hasNext()).thenReturn(true, false);
@@ -219,7 +220,7 @@ public class FamilyApplicationTest {
     }
 
     @Test
-    public void shouldGiveNoneForBrotherInLawForGivenPersonNameWhoDoesNotHaveBrotherInLaw() {
+    public void shouldGiveNoneForBrotherInLawForGivenPersonNameWhoDoesNotHaveBrotherInLaw() throws PersonNotFountException {
         Printer printer = mock(Printer.class);
         FileScanner scanner = mock(FileScanner.class);
         when(scanner.hasNext()).thenReturn(true, false);
@@ -233,7 +234,7 @@ public class FamilyApplicationTest {
     }
 
     @Test
-    public void shouldGivePersonNotFoundForBrotherInLawForGivenPersonNameWhoDoesNotExistInFamilyTree() {
+    public void shouldGivePersonNotFoundForBrotherInLawForGivenPersonNameWhoDoesNotExistInFamilyTree() throws PersonNotFountException {
         Printer printer = mock(Printer.class);
         FileScanner scanner = mock(FileScanner.class);
         when(scanner.hasNext()).thenReturn(true, false);
@@ -247,7 +248,7 @@ public class FamilyApplicationTest {
     }
 
     @Test
-    public void shouldExecuteAndPrintResult() {
+    public void shouldExecuteAndPrintResult() throws PersonNotFountException {
         Printer printer = mock(Printer.class);
         FileScanner scanner = mock(FileScanner.class);
         when(scanner.hasNext()).thenReturn(true, true, true, false);

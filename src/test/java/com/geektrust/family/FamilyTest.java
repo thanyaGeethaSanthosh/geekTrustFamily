@@ -2,14 +2,14 @@ package com.geektrust.family;
 
 import com.geektrust.constants.Gender;
 import com.geektrust.constants.Relationship;
-import com.geektrust.constants.Status;
+import com.geektrust.constants.ChildAdditionStatus;
+import com.geektrust.exceptions.PersonNotFountException;
 import org.junit.Test;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
+import static org.junit.Assert.*;
 
 public class FamilyTest {
 
@@ -18,29 +18,29 @@ public class FamilyTest {
         Family family = new Family(new Person("Shan", Gender.MALE));
         Person child = new Person("Ish", Gender.MALE);
 
-        assertEquals(Status.PERSON_NOT_FOUND, family.addChild("Anga", child));
+        assertThrows(PersonNotFountException.class, () -> family.addChild("Anga", child));
     }
 
     @Test
-    public void shouldSayCHILD_ADDITION_FAILEDWhenGivenPersonNameIsNotFemale() {
+    public void shouldSayCHILD_ADDITION_FAILEDWhenGivenPersonNameIsNotFemale() throws PersonNotFountException {
         Family family = new Family(new Person("Shan", Gender.MALE));
         Person child = new Person("Ish", Gender.MALE);
 
-        assertEquals(Status.CHILD_ADDITION_FAILED, family.addChild("Shan", child));
+        assertEquals(ChildAdditionStatus.CHILD_ADDITION_FAILED, family.addChild("Shan", child));
     }
 
     @Test
-    public void shouldSayCHILD_ADDITION_SUCCEEDEDWhenGivenPersonNameIsFemale() {
+    public void shouldSayCHILD_ADDITION_SUCCEEDEDWhenGivenPersonNameIsFemale() throws PersonNotFountException {
         Family family = new Family(new Person("Shan", Gender.MALE));
         Person partner = new Person("Anga", Gender.FEMALE);
         family.addPartner("Shan", partner);
         Person child = new Person("Ish", Gender.MALE);
 
-        assertEquals(Status.CHILD_ADDITION_SUCCEEDED, family.addChild("Anga", child));
+        assertEquals(ChildAdditionStatus.CHILD_ADDITION_SUCCEEDED, family.addChild("Anga", child));
     }
 
     @Test
-    public void shouldFindListOfSonForGivenMotherName() {
+    public void shouldFindListOfSonForGivenMotherName() throws PersonNotFountException {
         Person person = new Person("Shan", Gender.MALE);
         Family family = new Family(person);
         Person partner = new Person("Anga", Gender.FEMALE);
@@ -59,7 +59,7 @@ public class FamilyTest {
     }
 
     @Test
-    public void shouldFindListOfSonForGivenFatherName() {
+    public void shouldFindListOfSonForGivenFatherName() throws PersonNotFountException {
         Person person = new Person("Shan", Gender.MALE);
         Family family = new Family(person);
         Person partner = new Person("Anga", Gender.FEMALE);
@@ -78,7 +78,7 @@ public class FamilyTest {
     }
 
     @Test
-    public void shouldFindListOfDaughtersForGivenFatherName() {
+    public void shouldFindListOfDaughtersForGivenFatherName() throws PersonNotFountException {
         Person person = new Person("Shan", Gender.MALE);
         Family family = new Family(person);
         Person partner = new Person("Anga", Gender.FEMALE);
@@ -96,7 +96,7 @@ public class FamilyTest {
     }
 
     @Test
-    public void shouldFindSiblingsForGivenChildName() {
+    public void shouldFindSiblingsForGivenChildName() throws PersonNotFountException {
         Person person = new Person("Shan", Gender.MALE);
         Family family = new Family(person);
         Person partner = new Person("Anga", Gender.FEMALE);
@@ -115,7 +115,7 @@ public class FamilyTest {
     }
 
     @Test
-    public void shouldFindPaternalUncleForGivenPersonName() {
+    public void shouldFindPaternalUncleForGivenPersonName() throws PersonNotFountException {
         Person person = new Person("Shan", Gender.MALE);
         Family family = new Family(person);
         Person partner = new Person("Anga", Gender.FEMALE);
@@ -141,7 +141,7 @@ public class FamilyTest {
     }
 
     @Test
-    public void shouldFindPaternalAuntForGivenPersonName() {
+    public void shouldFindPaternalAuntForGivenPersonName() throws PersonNotFountException {
         Person person = new Person("Shan", Gender.MALE);
         Family family = new Family(person);
         Person partner = new Person("Anga", Gender.FEMALE);
@@ -167,7 +167,7 @@ public class FamilyTest {
     }
 
     @Test
-    public void shouldFindMaternalUncleForGivenPersonName() {
+    public void shouldFindMaternalUncleForGivenPersonName() throws PersonNotFountException {
         Person person = new Person("Shan", Gender.MALE);
         Family family = new Family(person);
         Person partner = new Person("Anga", Gender.FEMALE);
@@ -194,7 +194,7 @@ public class FamilyTest {
     }
 
     @Test
-    public void shouldFindMaternalAuntForGivenPersonName() {
+    public void shouldFindMaternalAuntForGivenPersonName() throws PersonNotFountException {
         Person person = new Person("Shan", Gender.MALE);
         Family family = new Family(person);
         Person partner = new Person("Anga", Gender.FEMALE);
@@ -220,7 +220,7 @@ public class FamilyTest {
     }
 
     @Test
-    public void shouldFindSistersHusbandsAsBrotherInLawForAPerson() {
+    public void shouldFindSistersHusbandsAsBrotherInLawForAPerson() throws PersonNotFountException {
         Person shan = new Person("Shan", Gender.MALE);
         Family family = new Family(shan);
         Person anga = new Person("Anga", Gender.FEMALE);
@@ -242,7 +242,7 @@ public class FamilyTest {
     }
 
     @Test
-    public void shouldFindBrothersOfPartnerAsBrotherInLawForAPerson() {
+    public void shouldFindBrothersOfPartnerAsBrotherInLawForAPerson() throws PersonNotFountException {
         Person shan = new Person("Shan", Gender.MALE);
         Family family = new Family(shan);
         Person anga = new Person("Anga", Gender.FEMALE);
@@ -265,7 +265,7 @@ public class FamilyTest {
 
 
     @Test
-    public void shouldFindBrothersWivesAsSisterInLawForAPerson() {
+    public void shouldFindBrothersWivesAsSisterInLawForAPerson() throws PersonNotFountException {
         Person shan = new Person("Shan", Gender.MALE);
         Family family = new Family(shan);
         Person anga = new Person("Anga", Gender.FEMALE);
@@ -287,7 +287,7 @@ public class FamilyTest {
     }
 
     @Test
-    public void shouldFindSistersOfPartnerAsSisterInLawForAPerson() {
+    public void shouldFindSistersOfPartnerAsSisterInLawForAPerson() throws PersonNotFountException {
         Person shan = new Person("Shan", Gender.MALE);
         Family family = new Family(shan);
         Person anga = new Person("Anga", Gender.FEMALE);
@@ -309,12 +309,12 @@ public class FamilyTest {
     }
 
     @Test
-    public void shouldGiveSisterInLawAsNullForAPersonWhoDoesNotExist() {
+    public void shouldGiveSisterInLawAsNullForAPersonWhoDoesNotExist(){
         Person shan = new Person("Shan", Gender.MALE);
         Family family = new Family(shan);
         Person anga = new Person("Anga", Gender.FEMALE);
         family.addPartner("Shan", anga);
 
-        assertNull(family.findRelatives("Lika", Relationship.SISTER_IN_LAW));
+        assertThrows(PersonNotFountException.class, () -> family.findRelatives("Lika", Relationship.SISTER_IN_LAW));
     }
 }

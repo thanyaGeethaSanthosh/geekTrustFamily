@@ -1,7 +1,7 @@
 package com.geektrust.family;
 
 import com.geektrust.constants.Gender;
-import com.geektrust.constants.Status;
+import com.geektrust.constants.ChildAdditionStatus;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -179,14 +179,14 @@ public class PersonTest {
     public void shouldSayCHILD_ADDITION_FAILEDWhenPersonIsNotAFemale() {
         Person person = new Person("Shan", Gender.MALE);
 
-        assertEquals(Status.CHILD_ADDITION_FAILED, person.addChild(new Person("Divya", Gender.FEMALE)));
+        assertEquals(ChildAdditionStatus.CHILD_ADDITION_FAILED, person.addChild(new Person("Divya", Gender.FEMALE)));
     }
 
     @Test
     public void shouldAddChildAndSayCHILD_ADDITION_SUCCEEDEDWhenPersonIsAFemale() {
         Person person = new Person("Anga", Gender.FEMALE);
 
-        assertEquals(Status.CHILD_ADDITION_SUCCEEDED, person.addChild(new Person("Divya", Gender.FEMALE)));
+        assertEquals(ChildAdditionStatus.CHILD_ADDITION_SUCCEEDED, person.addChild(new Person("Divya", Gender.FEMALE)));
     }
 
     @Test

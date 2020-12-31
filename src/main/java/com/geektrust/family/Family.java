@@ -1,7 +1,8 @@
 package com.geektrust.family;
 
 import com.geektrust.constants.Relationship;
-import com.geektrust.constants.Status;
+import com.geektrust.constants.ChildAdditionStatus;
+import com.geektrust.exceptions.PersonNotFountException;
 
 import java.util.List;
 
@@ -12,10 +13,10 @@ public class Family {
         this.familyHead = familyHead;
     }
 
-    public Status addChild(String motherName, Person child) {
+    public ChildAdditionStatus addChild(String motherName, Person child) throws PersonNotFountException {
         Person mother = this.familyHead.findPerson(motherName);
         if (mother == null) {
-            return Status.PERSON_NOT_FOUND;
+            throw new PersonNotFountException();
         }
         return mother.addChild(child);
     }
@@ -25,8 +26,11 @@ public class Family {
         member.addPartner(partner);
     }
 
-    public List<Person> findRelatives(String personName, Relationship relation) {
+    public List<Person> findRelatives(String personName, Relationship relation) throws PersonNotFountException {
         Person person = this.familyHead.findPerson(personName);
-        return person != null ? relation.findRelatives(person) : null;
+        if (person == null) {
+            throw new PersonNotFountException();
+        }
+        return relation.findRelatives(person);
     }
 }

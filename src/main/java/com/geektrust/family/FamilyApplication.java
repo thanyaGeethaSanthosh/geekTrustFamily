@@ -2,7 +2,8 @@ package com.geektrust.family;
 
 import com.geektrust.constants.Gender;
 import com.geektrust.constants.Relationship;
-import com.geektrust.constants.Status;
+import com.geektrust.constants.ChildAdditionStatus;
+import com.geektrust.exceptions.PersonNotFountException;
 import com.geektrust.io.FileScanner;
 import com.geektrust.io.Printer;
 
@@ -20,7 +21,7 @@ public class FamilyApplication {
         this.scanner = scanner;
     }
 
-    public void initialise() {
+    public void initialise() throws PersonNotFountException {
         Person shan = new Person("Shan", Gender.MALE);
         this.family = new Family(shan);
         Person anga = new Person("Anga", Gender.FEMALE);
@@ -82,36 +83,40 @@ public class FamilyApplication {
         String[] arguments = Arrays.copyOfRange(commandAndArgument, 1, commandAndArgument.length);
 
         if (command.equals("ADD_CHILD")) {
-            Status status = this.handleChildAddition(arguments);
-            this.showResult(status);
+            this.handleChildAddition(arguments);
         }
         if (command.equals("GET_RELATIONSHIP")) {
-            List<Person> relatives = this.handleGetRelationship(arguments);
-            if (relatives == null) {
-                this.showResult(Status.PERSON_NOT_FOUND);
-            } else {
-                this.showResult(relatives);
-            }
+            this.handleGetRelationship(arguments);
         }
     }
 
-    private List<Person> handleGetRelationship(String[] arguments) {
+    private void handleGetRelationship(String[] arguments) {
         String personName = arguments[0];
         String relationValue = arguments[1].replace("-", "_").toUpperCase();
         Relationship relationship = Relationship.valueOf(relationValue);
-        return this.family.findRelatives(personName, relationship);
+        try {
+            List<Person> relatives = this.family.findRelatives(personName, relationship);
+            this.showResult(relatives);
+        } catch (PersonNotFountException exception) {
+            this.printer.print(exception.getMessage());
+        }
     }
 
-    private Status handleChildAddition(String[] arguments) {
+    private void handleChildAddition(String[] arguments) {
         String motherName = arguments[0];
         String childName = arguments[1];
         Gender gender = Gender.valueOf(arguments[2].toUpperCase());
         Person child = new Person(childName, gender);
-        return this.family.addChild(motherName, child);
+        try {
+            ChildAdditionStatus childAdditionStatus = this.family.addChild(motherName, child);
+            this.showResult(childAdditionStatus);
+        } catch (PersonNotFountException exception) {
+            this.printer.print(exception.getMessage());
+        }
     }
 
-    private void showResult(Status status) {
-        this.printer.print(status.toString());
+    private void showResult(ChildAdditionStatus childAdditionStatus) {
+        this.printer.print(childAdditionStatus.toString());
     }
 
     private void showResult(List<Person> relatives) {
