@@ -1,4 +1,4 @@
-package com.greektrust.io;
+package com.geektrust.io;
 
 import java.util.Scanner;
 

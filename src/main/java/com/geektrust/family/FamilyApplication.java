@@ -1,10 +1,10 @@
-package com.greektrust.family;
+package com.geektrust.family;
 
-import com.greektrust.constants.Gender;
-import com.greektrust.constants.Relationship;
-import com.greektrust.constants.Status;
-import com.greektrust.io.FileScanner;
-import com.greektrust.io.Printer;
+import com.geektrust.constants.Gender;
+import com.geektrust.constants.Relationship;
+import com.geektrust.constants.Status;
+import com.geektrust.io.FileScanner;
+import com.geektrust.io.Printer;
 
 import java.util.Arrays;
 import java.util.List;

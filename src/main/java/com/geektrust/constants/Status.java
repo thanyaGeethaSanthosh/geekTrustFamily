@@ -1,4 +1,4 @@
-package com.greektrust.constants;
+package com.geektrust.constants;
 
 public enum Status {
     CHILD_ADDITION_FAILED, PERSON_NOT_FOUND, CHILD_ADDITION_SUCCEEDED

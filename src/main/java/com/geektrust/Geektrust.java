@@ -1,7 +1,7 @@
-package com.greektrust;
+package com.geektrust;
 
-import com.greektrust.family.FamilyApplication;
-import com.greektrust.io.FileScanner;
+import com.geektrust.family.FamilyApplication;
+import com.geektrust.io.FileScanner;
 
 import java.io.File;
 import java.io.FileNotFoundException;

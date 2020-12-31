@@ -1,4 +1,4 @@
-package com.greektrust.constants;
+package com.geektrust.constants;
 
 public enum Gender {
     MALE, FEMALE;

@@ -1,4 +1,4 @@
-package com.greektrust.exceptions;
+package com.geektrust.exceptions;
 
 public class PersonNotFountException extends Exception {
     public PersonNotFountException(){

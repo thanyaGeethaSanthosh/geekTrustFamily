@@ -1,8 +1,7 @@
-package family;
+package com.geektrust.family;
 
-import com.greektrust.family.FamilyApplication;
-import com.greektrust.io.FileScanner;
-import com.greektrust.io.Printer;
+import com.geektrust.io.FileScanner;
+import com.geektrust.io.Printer;
 import org.junit.Test;
 
 import static org.mockito.Mockito.*;

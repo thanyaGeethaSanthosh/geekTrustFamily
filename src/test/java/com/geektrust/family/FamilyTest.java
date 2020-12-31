@@ -1,10 +1,8 @@
-package family;
+package com.geektrust.family;
 
-import com.greektrust.constants.Gender;
-import com.greektrust.constants.Relationship;
-import com.greektrust.constants.Status;
-import com.greektrust.family.Family;
-import com.greektrust.family.Person;
+import com.geektrust.constants.Gender;
+import com.geektrust.constants.Relationship;
+import com.geektrust.constants.Status;
 import org.junit.Test;
 
 import java.util.ArrayList;
@@ -20,7 +18,6 @@ public class FamilyTest {
         Person child = new Person("Ish", Gender.MALE);
 
         assertEquals(Status.PERSON_NOT_FOUND, family.addChild("Anga", child));
-
     }
 
     @Test

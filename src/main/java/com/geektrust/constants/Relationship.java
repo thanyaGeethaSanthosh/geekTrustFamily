@@ -1,6 +1,6 @@
-package com.greektrust.constants;
+package com.geektrust.constants;
 
-import com.greektrust.family.Person;
+import com.geektrust.family.Person;
 
 import java.util.List;
 

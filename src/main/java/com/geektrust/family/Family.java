@@ -1,7 +1,7 @@
-package com.greektrust.family;
+package com.geektrust.family;
 
-import com.greektrust.constants.Relationship;
-import com.greektrust.constants.Status;
+import com.geektrust.constants.Relationship;
+import com.geektrust.constants.Status;
 
 import java.util.List;
 
