@@ -27,6 +27,6 @@ public class Family {
 
     public List<Person> findRelatives(String personName, Relationship relation) {
         Person person = this.familyHead.findPerson(personName);
-        return relation.findRelatives(person);
+        return person!=null?relation.findRelatives(person):null;
     }
 }

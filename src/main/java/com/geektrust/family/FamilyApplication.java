@@ -87,7 +87,11 @@ public class FamilyApplication {
         }
         if (command.equals("GET_RELATIONSHIP")) {
             List<Person> relatives = this.handleGetRelationship(arguments);
-            this.showResult(relatives);
+            if (relatives==null){
+                this.showResult(Status.PERSON_NOT_FOUND);
+            }else {
+                this.showResult(relatives);
+            }
         }
     }
 

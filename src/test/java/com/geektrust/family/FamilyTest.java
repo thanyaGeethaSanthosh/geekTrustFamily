@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 public class FamilyTest {
 
@@ -310,6 +311,17 @@ public class FamilyTest {
         sistersInLaw.add(satya);
 
         assertEquals(sistersInLaw, family.findRelatives("Lika", Relationship.SISTER_IN_LAW));
+
+    }
+
+    @Test
+    public void shouldGiveSisterInLawAsNullForAPersonWhoDoesNotExist() {
+        Person shan = new Person("Shan", Gender.MALE);
+        Family family = new Family(shan);
+        Person anga = new Person("Anga", Gender.FEMALE);
+        family.addPartner("Shan", anga);
+
+        assertNull(family.findRelatives("Lika", Relationship.SISTER_IN_LAW));
 
     }
 

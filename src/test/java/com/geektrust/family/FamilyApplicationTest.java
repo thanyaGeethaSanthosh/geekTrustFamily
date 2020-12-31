@@ -220,6 +220,34 @@ public class FamilyApplicationTest {
     }
 
     @Test
+    public void shouldGiveNoneForBrotherInLawForGivenPersonNameWhoDoesNotHaveBrotherInLaw() {
+        Printer printer = mock(Printer.class);
+        FileScanner scanner = mock(FileScanner.class);
+        when(scanner.hasNext()).thenReturn(true, false);
+        when(scanner.nextLine()).thenReturn("GET_RELATIONSHIP Yodhan Brother-In-Law");
+        FamilyApplication familyApplication = new FamilyApplication(printer, scanner);
+        familyApplication.initialise();
+
+        familyApplication.execute();
+
+        verify(printer).print("NONE");
+    }
+
+    @Test
+    public void shouldGivePersonNotFoundForBrotherInLawForGivenPersonNameWhoDoesNotExistInFamilyTree() {
+        Printer printer = mock(Printer.class);
+        FileScanner scanner = mock(FileScanner.class);
+        when(scanner.hasNext()).thenReturn(true, false);
+        when(scanner.nextLine()).thenReturn("GET_RELATIONSHIP Yaan Brother-In-Law");
+        FamilyApplication familyApplication = new FamilyApplication(printer, scanner);
+        familyApplication.initialise();
+
+        familyApplication.execute();
+
+        verify(printer).print("PERSON_NOT_FOUND");
+    }
+
+    @Test
     public void shouldExecuteAndPrintResult() {
         Printer printer = mock(Printer.class);
         FileScanner scanner = mock(FileScanner.class);
