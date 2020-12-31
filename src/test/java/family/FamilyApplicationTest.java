@@ -1,5 +1,6 @@
-package com.greektrust.family;
+package family;
 
+import com.greektrust.family.FamilyApplication;
 import com.greektrust.io.FileScanner;
 import com.greektrust.io.Printer;
 import org.junit.Test;

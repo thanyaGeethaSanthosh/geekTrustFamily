@@ -1,3 +1,5 @@
+package com.greektrust;
+
 import com.greektrust.family.FamilyApplication;
 import com.greektrust.io.FileScanner;
 

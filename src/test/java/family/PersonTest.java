@@ -1,7 +1,8 @@
-package com.greektrust.family;
+package family;
 
 import com.greektrust.constants.Gender;
 import com.greektrust.constants.Status;
+import com.greektrust.family.Person;
 import org.junit.Test;
 
 import java.util.ArrayList;
