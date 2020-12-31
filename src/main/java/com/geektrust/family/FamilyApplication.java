@@ -1,8 +1,8 @@
 package com.geektrust.family;
 
+import com.geektrust.constants.ChildAdditionStatus;
 import com.geektrust.constants.Gender;
 import com.geektrust.constants.Relationship;
-import com.geektrust.constants.ChildAdditionStatus;
 import com.geektrust.exceptions.PersonNotFountException;
 import com.geektrust.io.FileScanner;
 import com.geektrust.io.Printer;
@@ -94,6 +94,7 @@ public class FamilyApplication {
         String personName = arguments[0];
         String relationValue = arguments[1].replace("-", "_").toUpperCase();
         Relationship relationship = Relationship.valueOf(relationValue);
+
         try {
             List<Person> relatives = this.family.findRelatives(personName, relationship);
             this.showResult(relatives);
@@ -107,6 +108,7 @@ public class FamilyApplication {
         String childName = arguments[1];
         Gender gender = Gender.valueOf(arguments[2].toUpperCase());
         Person child = new Person(childName, gender);
+
         try {
             ChildAdditionStatus childAdditionStatus = this.family.addChild(motherName, child);
             this.showResult(childAdditionStatus);
@@ -123,7 +125,8 @@ public class FamilyApplication {
         if (relatives.size() <= 0) {
             this.printer.print("NONE");
         }
-        List<String> relativeNames = relatives.stream().map(Person::toString).collect(Collectors.toList());
+
+        List<String> relativeNames = relatives.stream().map(Person::getName).collect(Collectors.toList());
         String relativesList = String.join(" ", relativeNames);
         this.printer.print(relativesList);
     }

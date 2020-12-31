@@ -21,22 +21,11 @@ public class Person {
         this.gender = gender;
     }
 
-    public boolean isNameMatch(String name) {
-        return this.name.equals(name);
-    }
-
-    public boolean isPartner(String name) {
-        return this.partner != null && this.partner.name.equals(name);
-    }
-
-    public boolean isFemale() {
-        return this.gender.isFemale();
-    }
-
     public ChildAdditionStatus addChild(Person child) {
         if (this.gender != Gender.FEMALE) {
             return ChildAdditionStatus.CHILD_ADDITION_FAILED;
         }
+
         this.children.add(child);
         child.mother = this;
         return ChildAdditionStatus.CHILD_ADDITION_SUCCEEDED;
@@ -110,6 +99,7 @@ public class Person {
             List<Person> brothersOfPartner = this.partner.findBrothers();
             brothersInLaw.addAll(brothersOfPartner);
         }
+
         brothersInLaw.addAll(husbandsOfSisters);
         return brothersInLaw;
     }
@@ -128,9 +118,20 @@ public class Person {
         return sistersInLaw;
     }
 
-    @Override
-    public String toString() {
+    public String getName() {
         return this.name;
+    }
+
+    private boolean isNameMatch(String name) {
+        return this.name.equals(name);
+    }
+
+    private boolean isPartner(String name) {
+        return this.partner != null && this.partner.name.equals(name);
+    }
+
+    private boolean isFemale() {
+        return this.gender.isFemale();
     }
 
     private List<Person> getFilteredList(List<Person> people, Predicate<Person> predicate) {
@@ -163,6 +164,7 @@ public class Person {
         if (!this.isMarried() || this.gender.isFemale()) {
             return this.children;
         }
+
         return this.partner.children;
     }
 }

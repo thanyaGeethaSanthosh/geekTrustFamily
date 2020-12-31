@@ -7,69 +7,9 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
 
 public class PersonTest {
-    @Test
-    public void shouldSayTrueWhenGivenNameMatchesWhenPersonIsMale() {
-        Person person = new Person("Shan", Gender.MALE);
-
-        assertTrue(person.isNameMatch("Shan"));
-    }
-
-    @Test
-    public void shouldSayTrueWhenGivenNameMatchesWhenPersonIsFemale() {
-        Person person = new Person("Anga", Gender.FEMALE);
-
-        assertTrue(person.isNameMatch("Anga"));
-    }
-
-    @Test
-    public void shouldSayFalseWhenGivenNameDoesNotMatchesWhenPersonIsMale() {
-        Person person = new Person("Shan", Gender.MALE);
-
-        assertFalse(person.isNameMatch("Anga"));
-    }
-
-    @Test
-    public void shouldSayFalseWhenGivenNameDoesNotMatchesWhenPersonIsFemale() {
-        Person person = new Person("Anga", Gender.FEMALE);
-
-        assertFalse(person.isNameMatch("Shan"));
-    }
-
-    @Test
-    public void shouldSayTrueWhenGivenNameMatchesWithPartnerNameWhenPersonIsMale() {
-        Person person = new Person("Shan", Gender.MALE);
-        person.addPartner(new Person("Anga", Gender.FEMALE));
-
-        assertTrue(person.isPartner("Anga"));
-    }
-
-    @Test
-    public void shouldSayTrueWhenGivenNameMatchesWithPartnerNameWhenPersonIsFemale() {
-        Person person = new Person("Anga", Gender.FEMALE);
-        person.addPartner(new Person("Shan", Gender.MALE));
-
-        assertTrue(person.isPartner("Shan"));
-    }
-
-    @Test
-    public void shouldSayFalseWhenGivenNameNotMatchesWithPartnerNameWhenPersonIsMale() {
-        Person person = new Person("Shan", Gender.MALE);
-        person.addPartner(new Person("Anga", Gender.FEMALE));
-
-        assertFalse(person.isPartner("Vich"));
-    }
-
-    @Test
-    public void shouldSayShouldSayFalseWhenGivenNameDoesNotMatchesWithPartnerNameWhenPersonIsFemale() {
-        Person person = new Person("Anga", Gender.FEMALE);
-        person.addPartner(new Person("Shan", Gender.MALE));
-
-        assertFalse(person.isPartner("Vich"));
-    }
-
     @Test
     public void shouldFindThePersonWithGivenNameWhenItsKingItselfAndGiveThatPerson() {
         Person person = new Person("Shan", Gender.MALE);
@@ -163,20 +103,6 @@ public class PersonTest {
         Person person = new Person("Anga", Gender.FEMALE);
 
         assertEquals(ChildAdditionStatus.CHILD_ADDITION_SUCCEEDED, person.addChild(new Person("Divya", Gender.FEMALE)));
-    }
-
-    @Test
-    public void shouldSayTrueWhenPersonIsFemale() {
-        Person person = new Person("Anga", Gender.FEMALE);
-
-        assertTrue(person.isFemale());
-    }
-
-    @Test
-    public void shouldSayFalseWhenPersonIsNotFemale() {
-        Person person = new Person("Shan", Gender.MALE);
-
-        assertFalse(person.isFemale());
     }
 
     @Test

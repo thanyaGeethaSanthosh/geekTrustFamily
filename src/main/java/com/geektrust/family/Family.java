@@ -14,11 +14,11 @@ public class Family {
     }
 
     public ChildAdditionStatus addChild(String motherName, Person child) throws PersonNotFountException {
-        Person mother = this.familyHead.findPerson(motherName);
-        if (mother == null) {
+        Person person = this.familyHead.findPerson(motherName);
+        if (person == null) {
             throw new PersonNotFountException();
         }
-        return mother.addChild(child);
+        return person.addChild(child);
     }
 
     public void addPartner(String oldMemberName, Person partner) {
