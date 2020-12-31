@@ -57,17 +57,18 @@ public class FamilyApplication {
         this.family.addPartner("Jnki", new Person("Arit", Gender.MALE));
 
         this.family.addPartner("Asva", new Person("Satvy", Gender.FEMALE));
+
         this.family.addPartner("Vyas", new Person("Krpi", Gender.FEMALE));
 
         this.family.addChild("Dritha", new Person("Yodhan", Gender.MALE));
 
         this.family.addChild("Jnki", new Person("Laki", Gender.MALE));
-        this.family.addChild("Jnki", new Person("Lavanya", Gender.FEMALE));
+        this.family.addChild("Jnki", new Person("Lavnya", Gender.FEMALE));
 
         this.family.addChild("Satvy", new Person("Vasa", Gender.MALE));
 
         this.family.addChild("Krpi", new Person("Kriya", Gender.MALE));
-        this.family.addChild("Krpi", new Person("Krithi", Gender.MALE));
+        this.family.addChild("Krpi", new Person("Krithi", Gender.FEMALE));
     }
 
     public void execute() {
